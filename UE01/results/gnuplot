@@ -1,0 +1,3 @@
+plot "2_9.csv" using 1:2 pointtype 3 lc rgb "blue",  "2_9_p.csv" using 1:2 lc rgb "blue",  "2_72.csv" using 1:2 pointtype 3 lc rgb "red",  "2_72_p.csv" using 1:2 lc rgb "red"
+
+plot "3_9.csv" using 1:2 pointtype 3 lc rgb "blue",  "3_9_p.csv" using 1:2 lc rgb "blue",  "3_51.csv" using 1:2 pointtype 3 lc rgb "red",  "3_51_p.csv" using 1:2 lc rgb "red",  "3_107.csv" using 1:2 pointtype 3 lc rgb "green",  "3_107_p.csv" using 1:2 lc rgb "green"
