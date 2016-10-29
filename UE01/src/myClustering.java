@@ -1,6 +1,9 @@
-import java.awt.*;
-import java.util.*;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by tobias on 24.10.16.
@@ -38,30 +41,72 @@ public class myClustering implements Clustering {
             return null;
         }
 
-        Map<Point, List<Point>> retMap;
-        double oldError = Double.MAX_VALUE, newError = 0d;
+        //assign
+        final Map<Point, List<Point>> clusters = new HashMap<>();
+        centroids.forEach(p -> clusters.put(p, new ArrayList<>()));
+        doClustering(instances, centroids, clusters);
 
-        do {
-            oldError = newError;
-            //assign
-            final Map<Point, List<Point>> clusters = new HashMap<>();
-            centroids.forEach(p -> clusters.put(p, new ArrayList<>()));
-            List<Point> finalCentroids = centroids;
-            instances.forEach(p -> clusters.get(assign(p, finalCentroids)).add(p));
-            retMap = clusters;
+        return clusters;
+    }
 
-            //centroid and error calculation
-            centroids = new ArrayList<>();
-            newError = 0;
+    public Map<Point, List<Point>> clusterOne(List<Point> instances, List<Point> centroids) {
+        if (instances == null || instances.isEmpty() || centroids == null || centroids.isEmpty()) {
+            return null;
+        }
+
+        //assign
+        final Map<Point, List<Point>> clusters = new HashMap<>();
+        centroids.forEach(p -> clusters.put(p, new ArrayList<>()));
+
+        for (Point cP : instances) {
+            Point newCentroid = assign(cP, centroids);
+            Point oldCentroid = null;
             for (Map.Entry<Point, List<Point>> e : clusters.entrySet()) {
-                final Point cur = centroid(e.getKey(), e.getValue());
-                if (!(e.getValue() == null || e.getValue().isEmpty())) {
-                    centroids.add(cur);
-                    newError += e.getValue().stream().map(a -> cur.distance(a)).reduce(Double::sum).get();
+                if (e.getValue().contains(cP)) {
+                    oldCentroid = e.getKey();
                 }
             }
-        } while (newError != oldError);
+            if (!newCentroid.equals(oldCentroid)) {
+                clusters.get(newCentroid).add(cP);
+                recalculateCentroid(newCentroid, centroids, clusters);
+                if (oldCentroid != null) {
+                    clusters.get(oldCentroid).remove(cP);
+                    recalculateCentroid(oldCentroid, centroids, clusters);
+                }
+                break;
+            }
+        }
 
-        return retMap;
+        return clusters;
+    }
+
+    private void doClustering(List<Point> instances, List<Point> centroids, Map<Point, List<Point>> clusters) {
+       for (Point cP : instances) {
+           Point newCentroid = assign(cP, centroids);
+           Point oldCentroid = null;
+           for (Map.Entry<Point, List<Point>> e : clusters.entrySet()) {
+               if (e.getValue().contains(cP)) {
+                   oldCentroid = e.getKey();
+               }
+           }
+           if (!newCentroid.equals(oldCentroid)) {
+               clusters.get(newCentroid).add(cP);
+               recalculateCentroid(newCentroid, centroids, clusters);
+               if (oldCentroid != null) {
+                   clusters.get(oldCentroid).remove(cP);
+                   recalculateCentroid(oldCentroid, centroids, clusters);
+               }
+           }
+       }
+    }
+
+    private void recalculateCentroid(Point oldCentroid, List<Point> centroids, Map<Point, List<Point>> clusters) {
+        Point newCentroid = centroid(oldCentroid, clusters.get(oldCentroid));
+        centroids.remove(oldCentroid);
+        centroids.add(newCentroid);
+        clusters.put(newCentroid, clusters.get(oldCentroid));
+        if (oldCentroid.hashCode() != newCentroid.hashCode()) {
+            clusters.remove(oldCentroid);
+        }
     }
 }

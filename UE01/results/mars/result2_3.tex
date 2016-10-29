@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{tikz,pgfplots}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[scatter/classes={9_9c={mark=x,draw=blue},9_9p={mark=o,draw=blue},99_56c={mark=x,draw=green},99_56p={mark=o,draw=green},49_52c={mark=x,draw=red},49_52p={mark=o,draw=red}}]
+\addplot[scatter,only marks,scatter src=explicit symbolic]table[meta=label] {
+x y label
+9 9 9_9c
+10 10 9_9p
+11 12 9_9p
+13 12 9_9p
+14 9 9_9p
+3 4 9_9p
+5 7 9_9p
+9 8 9_9p
+10 12 9_9p
+99 56 99_56c
+67 87 99_56p
+100 50 99_56p
+110 55 99_56p
+108 45 99_56p
+109 43 99_56p
+49 52 49_52c
+50 50 49_52p
+54 33 49_52p
+35 67 49_52p
+50 45 49_52p
+48 66 49_52p
+56 53 49_52p
+};
+\end{axis}
+\end{tikzpicture}
+\end{document}
