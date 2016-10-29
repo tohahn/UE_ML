@@ -2,12 +2,12 @@
 \usepackage{tikz,pgfplots}
 \begin{document}
 \begin{tikzpicture}
-\begin{axis}[scatter/classes={40_50c={mark=x,draw=blue},40_50p={mark=o,draw=blue},110_55c={mark=x,draw=green},110_55p={mark=o,draw=green}}]
+\begin{axis}[scatter/classes={40.0_50.0c={mark=x,draw=blue},40.0_50.0p={mark=o,draw=blue},110.0_55.0c={mark=x,draw=green},110.0_55.0p={mark=o,draw=green}}]
 \addplot[scatter,only marks,scatter src=explicit symbolic]table[meta=label] {
 x y label
 40 50 40_50c
 110 55 110_55c
-110 55 110_55p
+110.0 55.0 110_55p
 };
 \end{axis}
 \end{tikzpicture}

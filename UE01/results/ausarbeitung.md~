@@ -13,6 +13,11 @@
 	2. Clustering
 	Wie man anhand der beiden Abbildungen erkennen kann ist es recht wahrscheinlich dass es 3 Roboter gibt. Es gibt drei Gruppierungen von Punkten, links, mittig und rechts im Graphen. Werden nur zwei Centroide verwendet werden die beiden Gruppen mittig und rechts im Bild in einen Cluster geworfen, dies scheint jedoch anhand der Konfiguration unwahrscheinlich, da zwischen den Punkten beider Gruppen recht große Abstände vorhanden sind und gerade die Punkte in der dritten Gruppe recht nahe beieinander liegen. 
 	3. Centroidauswahl
-	Bei dieser Konfiguration haben wir das Problem das keiner der Punkte dem zweiten initialen Centroid zugeordnet wird da alle Punkte entweder näher zum ersten oder zum dritten Centroid sind. Damit wird kein Punkt diesem Centroid zugeordnet, und er fällt aus dem Algorithmus heraus.
+	Bei dieser Konfiguration haben wir das Problem das keiner der Punkte dem zweiten initialen Centroid zugeordnet wird da alle Punkte entweder näher zum ersten oder zum dritten Centroid sind. Damit wird kein Punkt diesem Centroid zugeordnet, und er ist für den Rest des Algorithmus unnütz.
 	Eine Lösung dafür wäre für diesen Fall den Algorithmus zu modifizieren. Wird einem Centroid gar kein Punkt zugeordnet, so könnte man ihm den Punkt zuordnen der den weitesten Abstand von dem Centroid hat dem er zugeordnet wurde, da es hier wahrscheinlich ist dass sich eine andere Gruppe befindet. Damit läuft man allerdings wiederum Gefahr dass dieser Centroid einfach einen "Outlier" erwischt, also irgendeinen Punkt der sehr weit abweicht als Gruppe kennzeichnet. Um das unwahrscheinlicher zu machen könnte man statt dem weitest entfernten Punkt den zweit-, drittweitest entfernten Punkt nehmen, oder im mehrere der weiter entfernten Punkte zuweisen. Allerdings ist es bei k-Means immer so dass ein einzelner Outlier das Ergebnis sehr unschön beeinflusst.
-	
+
+3. Varianzclustering
+	1. Was auffällt ist dass es einen Cluster mit ziemlich vielen Punkten links unten gibt, der beim Clustering in mehrere Cluster unterteilt wurde. Danaben gibt es ein paar Cluster mit ziemlich verstreuten Punkten.
+	2. 38.63767077587896
+	3. Das optimale Clustering ist mit vier Clustern erreicht, die Kosten (in Gummimünzen) betragen dann 27.330231073933927.
+	4. Wie man an dem Plot erkennen kann gibt es nicht wirklich einen erkennbaren Zusammenhang, die Clusterings mit den höchsten Silhoutenkoeffizienten scheinen jedoch die besten zu sein.
