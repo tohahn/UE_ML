@@ -14,6 +14,7 @@ public class Magic {
     private static String[] label = {"a", "b", "c", "d", "e", "f", "g"};
 
     public static void main(String[] args) throws IOException {
+        //reading data from files and writing output
         List<Point> points = readData("/home/tobias/repos/tohahn/UE_ML/UE01/data/mars.csv");
         List<Point> centroids = new ArrayList<Point>();
         centroids.add(new Point(10,10));
@@ -38,12 +39,14 @@ public class Magic {
         List<Point2D> points_bike = readDataBike("/home/tobias/repos/tohahn/UE_ML/UE01/data/fahrrad.csv");
         printResultBike("bike/results1", meansBike.cluster(points_bike, 6));
 
+        //here we need to do more complicated stuff because we need to calculate for a range of kernels, also we need silhoute
         ArrayList<Map<Point2D, List<Point2D>>> results = new ArrayList<>();
         Map<Integer, Double> cost = new HashMap<>();
         Map<Integer, Double> sil = new HashMap<>();
         double min = Double.MAX_VALUE;
         int index = -1;
 
+        //calculates for kernels from 2 to 20 and calcs silhoutte factor
         Map<Point2D, List<Point2D>> sils = new HashMap<>();
         Point2D silsC = new Point2D.Float(0,0);
         sils.put(silsC, new ArrayList<>());
@@ -60,11 +63,12 @@ public class Magic {
             sils.get(silsC).add(new Point2D.Float(sil.get(i).floatValue(), cost.get(i).floatValue()));
         }
 
-        printResultBike("bike/result2", results.get(index));
-        printResultBike("bike/result4", sils);
+        printResultBike("bike/result2", results.get(index));    //prints the best clustering
+        printResultBike("bike/result4", sils);  //prints the silhoutte
     }
 
     private static double calculateCost(int num, Map<Point2D, List<Point2D>> clustering) {
+        //calculates cost in gummi coins
         float error = 0;
         for (Point2D c : clustering.keySet()) {
             for (Point2D p : clustering.get(c)) {
@@ -75,6 +79,7 @@ public class Magic {
     }
 
     private static double calcSilhoutte(Map<Point2D, List<Point2D>> clustering) {
+        //calculates the silhoutte factor
         List<Point2D> centroids = new ArrayList<>();
         List<Point2D> instances = new ArrayList<>();
 
@@ -83,26 +88,32 @@ public class Magic {
 
         double sil = 0, dA, dB;
         for (Point2D p : instances) {
+            //gets the two nearest centroids
             Point2D tempC = assign(p, centroids);
             centroids.remove(tempC);
             Point2D tempC2 = assign(p, centroids);
             centroids.add(tempC);
 
+            //calculates distance to them
             dA = tempC.distance(p);
             dB = tempC2.distance(p);
 
+            //adds silhoutte factor to counter
             sil += (dB - dA) / Math.max(dA, dB);
         }
+        //average the factor
         sil /= instances.size();
 
         return sil;
     }
 
     private static Point2D assign(Point2D instance, List<Point2D> centroids) {
+        //need to copy here because we can't use non static version from interface
         return centroids.stream().min((p1, p2) -> Double.compare(p1.distance(instance), p2.distance(instance))).get();
     }
 
     private static void printResult(String name, Map<Point, List<Point>> result) throws IOException {
+        //prints our result to a tex file
         BufferedWriter tex = new BufferedWriter(new FileWriter("/home/tobias/repos/tohahn/UE_ML/UE01/results/" + name + ".tex"));
 
         tex.write("\\documentclass{article}\n\\usepackage{tikz,pgfplots}\n\\begin{document}\n\\begin{tikzpicture}\n\\begin{axis}[scatter/classes={");
@@ -129,6 +140,7 @@ public class Magic {
     }
 
     private static void printResultBike(String name, Map<Point2D, List<Point2D>> result) throws IOException {
+        //prints our bike results to a tex file
         BufferedWriter tex = new BufferedWriter(new FileWriter("/home/tobias/repos/tohahn/UE_ML/UE01/results/" + name + ".tex"));
 
         tex.write("\\documentclass{article}\n\\usepackage{tikz,pgfplots}\n\\begin{document}\n\\begin{tikzpicture}\n\\begin{axis}[scatter/classes={");
@@ -155,6 +167,7 @@ public class Magic {
     }
 
     private static List<Point> readData(String name) throws IOException {
+        //reads our data from a csv file
         BufferedReader csv = new BufferedReader(new FileReader(name));
         csv.readLine();
 
@@ -167,6 +180,7 @@ public class Magic {
     }
 
     private static List<Point2D> readDataBike(String name) throws IOException {
+        //reads our bike data from a csv file
         BufferedReader csv = new BufferedReader(new FileReader(name));
         csv.readLine();
 
