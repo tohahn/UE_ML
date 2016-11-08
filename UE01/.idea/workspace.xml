@@ -21,14 +21,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="myVarianceClustering.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="myVarianceClustering.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/myVarianceClustering.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="77" column="110" selection-start-line="77" selection-start-column="110" selection-end-line="77" selection-end-column="110" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="216">
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="32" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -36,18 +34,18 @@
       <file leaf-file-name="Magic.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Magic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="182" column="45" selection-start-line="182" selection-start-column="45" selection-end-line="182" selection-end-column="45" />
+            <state relative-caret-position="98">
+              <caret line="81" column="16" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="myClustering.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="myClustering.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/myClustering.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="111" column="73" selection-start-line="111" selection-start-column="73" selection-end-line="111" selection-end-column="73" />
+            <state relative-caret-position="432">
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -111,7 +109,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -130,24 +130,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UE01" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UE01" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -416,11 +400,139 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/myVarianceClustering.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+        <state relative-caret-position="1296">
+          <caret line="77" column="110" selection-start-line="77" selection-start-column="110" selection-end-line="77" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Magic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myClustering.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myVarianceClustering.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1386">
+          <caret line="77" column="110" selection-start-line="77" selection-start-column="110" selection-end-line="77" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Magic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myClustering.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myVarianceClustering.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1296">
+          <caret line="77" column="110" selection-start-line="77" selection-start-column="110" selection-end-line="77" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Magic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3204">
+          <caret line="182" column="45" selection-start-line="182" selection-start-column="45" selection-end-line="182" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myClustering.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myVarianceClustering.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1386">
+          <caret line="77" column="110" selection-start-line="77" selection-start-column="110" selection-end-line="77" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Magic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3276">
+          <caret line="182" column="45" selection-start-line="182" selection-start-column="45" selection-end-line="182" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myClustering.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myVarianceClustering.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1386">
+          <caret line="77" column="110" selection-start-line="77" selection-start-column="110" selection-end-line="77" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Magic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3276">
+          <caret line="182" column="45" selection-start-line="182" selection-start-column="45" selection-end-line="182" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myClustering.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myVarianceClustering.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -436,9 +548,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -456,9 +565,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -478,9 +584,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -488,14 +591,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
           <caret line="1468" column="0" selection-start-line="1468" selection-start-column="0" selection-end-line="1468" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/myVarianceClustering.java">
+    <entry file="file://$PROJECT_DIR$/src/myClustering.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="77" column="110" selection-start-line="77" selection-start-column="110" selection-end-line="77" selection-end-column="110" />
+        <state relative-caret-position="432">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -504,19 +606,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Magic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="182" column="45" selection-start-line="182" selection-start-column="45" selection-end-line="182" selection-end-column="45" />
+        <state relative-caret-position="98">
+          <caret line="81" column="16" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/myClustering.java">
+    <entry file="file://$PROJECT_DIR$/src/myVarianceClustering.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="111" column="73" selection-start-line="111" selection-start-column="73" selection-end-line="111" selection-end-column="73" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="216">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="32" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
