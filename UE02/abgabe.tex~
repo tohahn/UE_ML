@@ -9,12 +9,14 @@
 \usepackage{placeins}
 \graphicspath{ {results/} }
 
-\addtolength{\oddsidemargin}{-.875in}
-\addtolength{\evensidemargin}{-.875in}
-\addtolength{\textwidth}{1.75in}
-
-\addtolength{\topmargin}{-.875in}
-\addtolength{\textheight}{1.75in}
+\tikzset{
+  treenode/.style = {shape=rectangle, rounded corners,
+                     draw, align=center,
+                     top color=white, bottom color=blue!20},
+  root/.style     = {treenode, font=\Large, bottom color=red!30},
+  env/.style      = {treenode, font=\ttfamily\normalsize},
+  dummy/.style    = {circle,draw}
+}
 
 \begin{document}
 \section{Begriffsdefinitionen}
@@ -926,4 +928,73 @@ x y label
 \paragraph{}
 Zum Vergleich: Die Kosten in Gummimünzen sind beim Dichteclustering viel höher, und es werden mehr Fahrer benötigt. Das ist natürlich für den Chef ein Nachteil, weswegen dieses Clustering wahrscheinlich nicht gewählt werden wird.
 Für die Kunden ist außerdem von Nachteil, dass beim DBSCAN Clustering manche von ihnen nicht mehr angefahren werden, da manche Punkte Noise sind und damit keinem Cluster zufallen. Dafür haben sie allerdings den Vorteil, schneller zu beliefert werden, da ein Fahrer weniger von ihnen betreut.
+
+\subsection{Descision Tree Learning}
+\subsubsection{Mathematik}
+Der erste Schritt im lernen eines neuen Entscheidungsbaumes besteht darin den Informationsgehalt der zu klassifizierenden Fälle zu bestimmen um später den \texttt{InformationGain()} zu berechnen. Da jedes Ergebnis in der Tabelle ein unterschiedliches ist ergibt sich für
+$I(T)= I(\frac 1 4,\frac 1 4,\frac 1 4,\frac 1 4) = 2$.\\
+Für die jeweiligen Entscheidungskategorien ergibt sich:\\
+$Info(Geburtsort,T)=\frac 1 4 * I(\frac{1}{1}) + \frac 1 4 *I(\frac{1}{1})+ \frac 1 2 * I(\frac 1 2 , \frac 1 2 ) = 
+\frac 1 4 * 0 + \frac 1 4 *0+ \frac 1 2 * 1
+=0.5 \\
+Gain(Geschlecht,T)=Info(T)-Info(Geschlecht,T)=2-0.5=1.5\\
+$
+\\
+$Info(Geschlecht,T)=\frac 1 4 * I(\frac{1}{1}) + \frac 3 4 * I(\frac 1 3 , \frac 1 3 ,\frac 1 3) = 
+\frac 1 4 * 0 +  \frac 3 4 * 1.585
+=1.187\\
+Gain(Geschlecht,T)=Info(T)-Info(Geschlecht,T)=2-1.187=0.813\\
+$
+\\
+$Info(Haarfarbe,T)=\frac 1 2 * I(\frac{1}{2},\frac{1}{2}) + \frac 1 2 * I(\frac 1 2 , \frac 1 2 ) = 
+\frac 1 2 * 1 +  \frac 1 2 * 1
+=1\\
+Gain(Haarfarbe,T)=Info(T)-Info(Haarfarbe,T)=2-1=1\\
+$
+Demnach ist der Informationgain am höchsten bei der Unterscheidung nach Geburtsort. Bei dieser Unterscheidung entstehen direkt zwei Blattknoten und am dritten Knoten muss nur noch zwischen zwei Fällen unterschieden werden:
+$I(T_{USA})= I(\frac 1 2,\frac 1 2) = 1$.\\
+\\
+$
+Info(Haarfarbe,T_{USA})=\frac 1 2 * I(\frac{1}{2}) + \frac 1 2 * I( \frac 1 2 ) = 
+=0\\
+Gain(Haarfarbe,T_{USA})=1-0=1
+$
+\\
+$Info(Geschlecht,T_{USA})=\frac 1 1 * I(\frac{1}{2},\frac{1}{2}) = 
+=1\\
+Gain(Geschlecht,T_{USA})=1-1=0
+$
+\\
+Nachdem Geschlecht überhaupt keine Information hinzufügen würde unterscheidet der Baum an dieser Stelle zwischen Haarfarbe und erzeugt so die letzten zwei Blattknoten.
+
+\subsubsection{Entscheidungsgraph}
+\begin{tikzpicture}
+  [
+    grow                    = right,
+    sibling distance        = 6em,
+    level distance          = 13em,
+    edge from parent/.style = {draw, -latex},
+    every node/.style       = {font=\footnotesize},
+    sloped
+  ]
+  \node [root] {Geburtsort?}
+    child { node [env] {Jean-Claude Van Damme}
+      edge from parent node [below] {Belgien} }
+    child { node [env] {Angela Merkel}
+      edge from parent node [below] {Deutschland} }
+    child { node [env] {Haarfarbe?}
+      child { node [env] {Jon Bon Jovi}
+      	edge from parent node [below] {Hell} }
+      child { node [env] {Martin Luther King}
+      	edge from parent node [below] {Dunkel} } };
+\end{tikzpicture}
+\subsubsection{Frage A}
+Alle Personen deutscher Herkunft werden von dem Entscheidungsbaum als Angela Merkel klassifiziert.
+\subsubsection{Frage B}
+Donald Trump wird vom Entscheidungsbaum folgendermaßen klassifiziert:\\
+$$Geburtsort \rightarrow USA$$\\
+$$Haarfarbe \rightarrow (Hell) Bon Jovi$$\\
+\subsection{Frage C}
+Da Arnold Schwarzenegger weder in USA noch in Deutschland oder Belgien geboren ist fällt er in keine der Trainierten Kategorien und der Baum kann ihn nicht klassifizieren. Bei Pipi Langstrumpf ist der Geburtsort nicht bekannt was zum selben Problem führt.
+
 \end{document}
