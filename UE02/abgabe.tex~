@@ -18,7 +18,12 @@
   dummy/.style    = {circle,draw}
 }
 
+\title{Machine Learning Übungsblatt 2}
+\author{Ramon Leiser\and Tobias Hahn}
+
 \begin{document}
+\maketitle
+\newpage
 \section{Begriffsdefinitionen}
 \subsection{Klassifikation - Clustering}
 \paragraph{}
@@ -76,7 +81,7 @@ Im folgenden die Graphen für die gegebene Anzahl von k:
 \end{figure}
 \FloatBarrier
 \subsubsection{Auswahl Parameter}
-Wie im Graphen \ref{figure_k3} markiert, wählen wir das Grenzobjekt mit den Werten MinPts = 4 und Epsilon = 0.012563822348311689 aus, wobei wir Epsilon der Einfachheit halber auf 0.012 abrunden.
+Wie im Graphen 5 markiert, wählen wir das Grenzobjekt mit den Werten MinPts = 4 und Epsilon = 0.012563822348311689 aus, wobei wir Epsilon der Einfachheit halber auf 0.012 abrunden.
 
 \subsection{DBSCAN}
 Mit den vorhin bestimmten Parametern wurde der DBSCAN-Algorithmus auf unsere Daten angewandt. Dabei kam folgendes Clustering zustande:
@@ -929,8 +934,8 @@ x y label
 Zum Vergleich: Die Kosten in Gummimünzen sind beim Dichteclustering viel höher, und es werden mehr Fahrer benötigt. Das ist natürlich für den Chef ein Nachteil, weswegen dieses Clustering wahrscheinlich nicht gewählt werden wird.
 Für die Kunden ist außerdem von Nachteil, dass beim DBSCAN Clustering manche von ihnen nicht mehr angefahren werden, da manche Punkte Noise sind und damit keinem Cluster zufallen. Dafür haben sie allerdings den Vorteil, schneller zu beliefert werden, da ein Fahrer weniger von ihnen betreut.
 
-\subsection{Descision Tree Learning}
-\subsubsection{Mathematik}
+\section{Descision Tree Learning}
+\subsection{Mathematik}
 Der erste Schritt im lernen eines neuen Entscheidungsbaumes besteht darin den Informationsgehalt der zu klassifizierenden Fälle zu bestimmen um später den \texttt{InformationGain()} zu berechnen. Da jedes Ergebnis in der Tabelle ein unterschiedliches ist ergibt sich für
 $I(T)= I(\frac 1 4,\frac 1 4,\frac 1 4,\frac 1 4) = 2$.\\
 Für die jeweiligen Entscheidungskategorien ergibt sich:\\
@@ -967,7 +972,7 @@ $
 \\
 Nachdem Geschlecht überhaupt keine Information hinzufügen würde unterscheidet der Baum an dieser Stelle zwischen Haarfarbe und erzeugt so die letzten zwei Blattknoten.
 
-\subsubsection{Entscheidungsgraph}
+\subsection{Entscheidungsgraph}
 \begin{tikzpicture}
   [
     grow                    = right,
@@ -994,7 +999,38 @@ Alle Personen deutscher Herkunft werden von dem Entscheidungsbaum als Angela Mer
 Donald Trump wird vom Entscheidungsbaum folgendermaßen klassifiziert:\\
 $$Geburtsort \rightarrow USA$$\\
 $$Haarfarbe \rightarrow (Hell) Bon Jovi$$\\
-\subsection{Frage C}
+\subsubsection{Frage C}
 Da Arnold Schwarzenegger weder in USA noch in Deutschland oder Belgien geboren ist fällt er in keine der Trainierten Kategorien und der Baum kann ihn nicht klassifizieren. Bei Pipi Langstrumpf ist der Geburtsort nicht bekannt was zum selben Problem führt.
+
+
+\section{Regression}
+\subsection{Mathematik}
+Um einen minimalen Fehler bei der Abweichung der Messwerte von der Approximation zu finden leiten wir die Funktion nach $m$ und $t$ ab um dann Nullstellen der Ableitung zu suchen.\\
+\[ Err(x_{1\cdots n}, t_{1\cdots n},m,b)= \sum_{i=1}^n (x_i-(b+m*t_i))^2 \]
+\[\frac{d(m,t)}{d(m)}Err(x_{1\cdots n}, t_{1\cdots n},m,b)= 2\sum_{i=1}^n(x_i-b-m*t_i)*t_i \]
+\[\frac{d(m,t)}{d(t)}Err(x_{1\cdots n}, t_{1\cdots n},m,b)= 2\sum_{i=1}^n(x_i-b-m*t_i) \]
+Jeweils nach b beziehungsweise m aufgelöst ergibt sich:
+\begin{align*}
+2\sum_{i=1}^n(x_i-b-m*t_i) = 0 & \text{   (/2)}\\
+	\sum_{i=1}^n(x_i-b-m*t_i) = 0 & \text{   (+n*b)}\\
+  \sum_{i=1}^n(x_i-m*t_i) = n*b & \text{   (/n)} \\ 
+  x_{avg}-m*t_{avg} = b \\
+  \\
+ 2\sum_{i=1}^n(x_i-b-m*t_i)*t_i  = 0 & \text{   (/2)}\\
+ \sum_{i=1}^n(x_i-b-m*t_i)*t_i  = 0& \text{   }\\
+ \sum_{i=1}^n(x_i*t_i -b*t_i -m*t_i^2) = 0& \text{   (b ersetzen)}\\
+ \sum_{i=1}^n(x_i*t_i -(x_{avg}-m*t_{avg})*t_i -m*t_i^2) = 0\\
+ \sum_{i=1}^n(x_i -x_{avg}-m*t_{avg} -m*t_i)*t_i = 0\\
+=>\sum_{i=1}^n(x_i -x_{avg}-m*t_{avg} -m*t_i)=0 \\
+\sum_{i=1}^n(x_i -x_{avg}-m*(t_{avg} -t_i))=0 & \text{   (nach m*x auflösen, durch x teilen)}\\
+m=\frac{\sum_{i=1}^n(x_i -x_{avg})}
+{-\sum_{i=1}^n(t_{avg} -t_i))} \\
+=>m=\frac{\sum_{i=1}^n(x_i -x_{avg})*( t_i-t_{avg})}
+{\sum_{i=1}^n(( t_i-t_{avg})^2)} \\
+\end{align*}
+\subsection{Fragen}Wir entschieden uns die Lineare Regression jeweils über zwei einzelne Jahre zu legen, ein Jahr von dem wir einen großen Fehler erwarten und eines bei dem die Regression bessere Ergebnisse liefert. Die Formeln von oben wurden jeweils in einem Spreadsheet umgesetzt wodurch sehr viele Zwischenergebnisse sichtbar sind. Dabei wird bei der Gleichung für das $m$ der Teil oberhalb vom Bruchstrich separat ausgerechnet vom unteren Teil. Die jeweiligen Ergebnisse sieht mann bei $Sum$ welche dann das $m$ ergeben. Als Daten wurden die Jahre 1996 und 1999 verwendet. \\
+Bei dem Jahr 1996 ergab sich eine eine negative Steigung für die Regressionsgerad um fast 2 Einheiten pro Monat. Auch zu erkennen war wie $ x - x_{avg}$ zunehmen stärker negative Werte annahm wodurch sich die fallende Regressionsgerade erklärt. Bei diesem Jahr ist jedoch der quadratische Fehler mit über 500 recht hoch.\\
+Beim Jahr 1999 ergab sich für die Regressionsgerade eine sehr schwache Steigung aber auch ein viel kleinerer Fehler. In diesem Jahr verlaufen die Daten fast konstant entlang einer horizontalen Linie mit dem y-Offset 110.\\
+Für den gesamten Datensatz erscheint eine Regression eher weniger sinnvoll da man den Daten einen wellenartigen Verlauf ansieht und sich ein sehr großer quadratischer Fehler ergeben würde bei einer sehr schwachen Steigung/Gefälle der Regressionsgerade.
 
 \end{document}

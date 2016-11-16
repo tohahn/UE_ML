@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.10.29)  15 NOV 2016 18:12
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.10.29)  16 NOV 2016 17:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -739,18 +739,18 @@ Package: placeins 2005/04/18  v 2.2
 ) (./abgabe.aux)
 \openout1 = `abgabe.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -820,45 +820,45 @@ ABD: EveryShipout initializing macros
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.9} into y
 our preamble.
- on input line 21.
+ on input line 24.
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<results/2_1_1.png, id=12, 1027.84pt x 762.85pt>
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+<results/2_1_1.png, id=17, 1027.84pt x 762.85pt>
 File: results/2_1_1.png Graphic file (type png)
  <use results/2_1_1.png>
-Package pdftex.def Info: results/2_1_1.png used on input line 55.
+Package pdftex.def Info: results/2_1_1.png used on input line 60.
 (pdftex.def)             Requested size: 345.0pt x 256.05977pt.
 
-<results/2_1_2.png, id=14, 1027.84pt x 762.85pt>
+<results/2_1_2.png, id=19, 1027.84pt x 762.85pt>
 File: results/2_1_2.png Graphic file (type png)
  <use results/2_1_2.png>
-Package pdftex.def Info: results/2_1_2.png used on input line 59.
+Package pdftex.def Info: results/2_1_2.png used on input line 64.
 (pdftex.def)             Requested size: 345.0pt x 256.05977pt.
 
-<results/2_1_3.png, id=15, 1023.825pt x 732.7375pt>
+<results/2_1_3.png, id=20, 1023.825pt x 732.7375pt>
 File: results/2_1_3.png Graphic file (type png)
  <use results/2_1_3.png>
-Package pdftex.def Info: results/2_1_3.png used on input line 63.
+Package pdftex.def Info: results/2_1_3.png used on input line 68.
 (pdftex.def)             Requested size: 345.0pt x 246.91368pt.
 
-<results/2_1_4.png, id=16, 1023.825pt x 732.7375pt>
+<results/2_1_4.png, id=21, 1023.825pt x 732.7375pt>
 File: results/2_1_4.png Graphic file (type png)
  <use results/2_1_4.png>
-Package pdftex.def Info: results/2_1_4.png used on input line 67.
+Package pdftex.def Info: results/2_1_4.png used on input line 72.
 (pdftex.def)             Requested size: 345.0pt x 246.91368pt.
 
-<results/2_1_5.png, id=17, 1023.825pt x 732.7375pt>
+<results/2_1_5.png, id=22, 1023.825pt x 732.7375pt>
 File: results/2_1_5.png Graphic file (type png)
  <use results/2_1_5.png>
-Package pdftex.def Info: results/2_1_5.png used on input line 71.
+Package pdftex.def Info: results/2_1_5.png used on input line 76.
 (pdftex.def)             Requested size: 345.0pt x 246.91368pt.
 
-<results/2_1_6.png, id=18, 1027.84pt x 762.85pt>
+<results/2_1_6.png, id=23, 1027.84pt x 762.85pt>
 File: results/2_1_6.png Graphic file (type png)
  <use results/2_1_6.png>
-Package pdftex.def Info: results/2_1_6.png used on input line 75.
+Package pdftex.def Info: results/2_1_6.png used on input line 80.
 (pdftex.def)             Requested size: 345.0pt x 256.05977pt.
 
 
@@ -876,85 +876,91 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[2 <./results/2_1_1.png>] [3 <./results/2_1_2.png> <./results/2_1_3.png>]
-[4 <./results/2_1_4.png> <./results/2_1_5.png>] [5 <./results/2_1_6.png>]
-
-LaTeX Warning: Reference `figure_k3' on page 6 undefined on input line 79.
-
-<results/2_2_1.png, id=39, 1027.84pt x 762.85pt>
+[3 <./results/2_1_1.png>] [4 <./results/2_1_2.png> <./results/2_1_3.png>]
+[5 <./results/2_1_4.png> <./results/2_1_5.png>] [6 <./results/2_1_6.png>]
+<results/2_2_1.png, id=44, 1027.84pt x 762.85pt>
 File: results/2_2_1.png Graphic file (type png)
  <use results/2_2_1.png>
-Package pdftex.def Info: results/2_2_1.png used on input line 85.
+Package pdftex.def Info: results/2_2_1.png used on input line 90.
 (pdftex.def)             Requested size: 345.0pt x 256.05977pt.
 File: results/2_2_1.png Graphic file (type png)
 
 <use results/2_2_1.png>
-Package pdftex.def Info: results/2_2_1.png used on input line 925.
+Package pdftex.def Info: results/2_2_1.png used on input line 930.
 (pdftex.def)             Requested size: 345.0pt x 256.05977pt.
- [6
+ [7
 
  <./results/2_2_1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 934--969
+Underfull \hbox (badness 10000) in paragraph at lines 939--974
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 934--969
+Underfull \hbox (badness 10000) in paragraph at lines 939--974
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 934--969
-
- []
-
-[7]
-Overfull \hbox (6.41547pt too wide) in paragraph at lines 990--991
-[] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 994--995
+Underfull \hbox (badness 10000) in paragraph at lines 939--974
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 995--996
+Overfull \hbox (6.41547pt too wide) in paragraph at lines 995--996
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 999--1000
+
+ []
+
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 1000--1001
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 996--997
+Underfull \hbox (badness 10000) in paragraph at lines 1001--1002
 
  []
 
-[9] (./abgabe.aux)
 
-LaTeX Warning: There were undefined references.
+Underfull \hbox (badness 10000) in paragraph at lines 1008--1009
 
- ) 
+ []
+
+
+Overfull \hbox (20.58592pt too wide) in paragraph at lines 1030--1030
+[] 
+ []
+
+[10] [11] [12] (./abgabe.aux) ) 
 Here is how much of TeX's memory you used:
- 20049 strings out of 493304
- 526193 string characters out of 6139870
- 1438787 words of memory out of 5000000
- 23126 multiletter control sequences out of 15000+600000
- 6079 words of font info for 23 fonts, out of 8000000 for 9000
+ 20068 strings out of 493304
+ 526389 string characters out of 6139870
+ 1437422 words of memory out of 5000000
+ 23137 multiletter control sequences out of 15000+600000
+ 9191 words of font info for 34 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 56i,10n,74p,59440b,1690s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmtt10.pfb>
-Output written on abgabe.pdf (9 pages, 359153 bytes).
+ 56i,11n,74p,59440b,1690s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmtt10.pfb>
+Output written on abgabe.pdf (12 pages, 394339 bytes).
 PDF statistics:
- 96 PDF objects out of 1000 (max. 8388607)
- 58 compressed objects within 1 object stream
+ 117 PDF objects out of 1000 (max. 8388607)
+ 73 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  60 words of extra memory for PDF output out of 10000 (max. 10000000)
 
