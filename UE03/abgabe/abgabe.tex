@@ -1,0 +1,45 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{listings}
+
+\title{Machine Learning Übungsblatt 3}
+\author{Ramon Leiser\and Tobias Hahn}
+
+\begin{document}
+\maketitle
+\newpage
+\section{Begriffsdefinitionen}
+\subsection{Hidden Markov Model - Bias}
+\paragraph{}
+\subsection{Inductive Learning Hypothesis}
+\paragraph{}
+Die induktive Lernhypothese sagt dass eine Hypothese welche alle Trainingsdaten gut vorhersagen kann auch neue Testdaten gut vorhersagt. Das stimmt deswegen nicht, weil wir nicht wissen ob sich neue Testdaten auch an die vorherigen halten. Nimmt man Beispiel an dass wir das Wetter für einen Tag kennen und daraus bestimmen ob ich zur Uni gehe oder nicht, so könnten die Trainingsdaten folgendermaßen aussehen:
+
+\paragraph{}
+\begin{tabular}{|l|l|}
+	\hline
+	Wetter & Ich gehe zur Uni \\\hline
+	Sonnig & Ja \\\hline
+	Sonnig & Ja  \\\hline
+	Regen & Nein  \\\hline
+\end{tabular}
+
+\paragraph{}
+Eine Hypothese welche die Daten gut beschreibt wäre \{Sonnig\}. Nun kann aber ein Tag kommen an dem ich zur Uni gehen muss obwohl es regnet - beispielsweise weil gerade Machine Learning Vorlesung ist und ich die natürlich nicht verpassen will. Dass würde der Hypothese wiedersprechen.
+
+\section{Concept Learning}
+\subsection{Frage}
+Das Konzept bedeutet dass das Fortbewegungsmittel zwei Räder haben muss und per Pedal angetrieben wird, und eine beliebige Farbe bzw. Aussehen hat (jedoch nicht keine haben darf!). Wahrscheinlich handelt es sich darum um ein Fahrrad, da dieses zwei Räder hat und per Pedal angetrieben wird, während es immer irgendeine Farbe und irgendein Aussehen hat.
+\subsection{Trike}
+Ein Trike hat irgendeine Farbe und irgendein Aussehen, immer drei Räder und entweder einen Motor oder Pedale. Da wir jedoch keine Ausdrucksweise dafür haben dass ein Attribut nur gewisse Werte, andere jedoch nicht annehmen kann, so bleiben uns zwei Alternativen übrig. Entweder wir geben zwei Hypothesen an (\{Drei,Pedal,?,?\} und \{Drei,Motor,?,?\}) oder wir geben eine allgemeine an \{Drei,?,?,?\} worunter jedoch auch ein Trike mit Pferdantrieb fallen würde.
+\subsection{Beispielmenge}
+Für jede mögliche Ausprägung eines Attributs gibt es jede mögliche Kombination der anderen Attribute. Wir müssen also die Anzahl der möglichen Ausprägungen für jedes Attribut miteinander multiplizieren, und erhalten die Zahl 4 * 3 * 3 * 3 = 108.
+\subsection{Mögliche Hypothesen mit Bias}
+Bei Hypothesen kann jedes Attribut entweder genau belegt werden, beliebig sein oder ausgeschlossen. Damit haben wir für die vorherige Rechnung bei jedem Attribut noch zwei weitere Ausprägungen hinzufügen, um die Anzahl der möglichen Hypothesen berechnen zu können: 6 * 5 * 5 * 5 = 750
+Das bedeutet dass wir nicht allzu viele Hypothesen zu überprüfen haben - der Algorithmus sollte nicht lange brauchen die optimale zu finden.
+\subsection{Mögliche Hypothesen ohne Bias}
+\subsection{Genereller-als}
+Die Hypothesen sind folgendermaßen geordnet (von der generellsten zur spezifischsten): \{?,?,?,?\}, \{Eins,?,?,?\}, \{?,?,,?\}, \{?,Pedal,Blau,?\}
+\end{document}
