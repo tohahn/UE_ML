@@ -11,11 +11,13 @@
 \maketitle
 \newpage
 \section{Begriffsdefinitionen}
+
 \subsection{Hidden Markov Model - Bias}
 \paragraph{}
+
 \subsection{Inductive Learning Hypothesis}
 \paragraph{}
-Die induktive Lernhypothese sagt dass eine Hypothese welche alle Trainingsdaten gut vorhersagen kann auch neue Testdaten gut vorhersagt. Das stimmt deswegen nicht, weil wir nicht wissen ob sich neue Testdaten auch an die vorherigen halten. Nimmt man Beispiel an dass wir das Wetter für einen Tag kennen und daraus bestimmen ob ich zur Uni gehe oder nicht, so könnten die Trainingsdaten folgendermaßen aussehen:
+Die induktive Lernhypothese sagt dass eine Hypothese welche alle Trainingsdaten gut vorhersagen kann auch neue Testdaten gut vorhersagt. Das stimmt deswegen nicht, weil unbekannt ob sich neue Testdaten auch an die vorherigen halten. Nimmt man Beispiel an dass das Wetter für einen Tag bekannt ist und daraus bestimmt wird ob ich zur Uni gehe oder nicht, so könnten die Trainingsdaten folgendermaßen aussehen:
 
 \paragraph{}
 \begin{tabular}{|l|l|}
@@ -30,16 +32,126 @@ Die induktive Lernhypothese sagt dass eine Hypothese welche alle Trainingsdaten 
 Eine Hypothese welche die Daten gut beschreibt wäre \{Sonnig\}. Nun kann aber ein Tag kommen an dem ich zur Uni gehen muss obwohl es regnet - beispielsweise weil gerade Machine Learning Vorlesung ist und ich die natürlich nicht verpassen will. Dass würde der Hypothese wiedersprechen.
 
 \section{Concept Learning}
+
 \subsection{Frage}
 Das Konzept bedeutet dass das Fortbewegungsmittel zwei Räder haben muss und per Pedal angetrieben wird, und eine beliebige Farbe bzw. Aussehen hat (jedoch nicht keine haben darf!). Wahrscheinlich handelt es sich darum um ein Fahrrad, da dieses zwei Räder hat und per Pedal angetrieben wird, während es immer irgendeine Farbe und irgendein Aussehen hat.
+
 \subsection{Trike}
-Ein Trike hat irgendeine Farbe und irgendein Aussehen, immer drei Räder und entweder einen Motor oder Pedale. Da wir jedoch keine Ausdrucksweise dafür haben dass ein Attribut nur gewisse Werte, andere jedoch nicht annehmen kann, so bleiben uns zwei Alternativen übrig. Entweder wir geben zwei Hypothesen an (\{Drei,Pedal,?,?\} und \{Drei,Motor,?,?\}) oder wir geben eine allgemeine an \{Drei,?,?,?\} worunter jedoch auch ein Trike mit Pferdantrieb fallen würde.
+Ein Trike hat irgendeine Farbe und irgendein Aussehen, immer drei Räder und entweder einen Motor oder Pedale. Da es jedoch keine Ausdrucksweise dafür gibt dass ein Attribut nur gewisse Werte, andere jedoch nicht annehmen kann, so bleiben =zwei Alternativen übrig. Entweder es werden zwei Hypothesen angegeben (\{Drei,Pedal,?,?\} und \{Drei,Motor,?,?\}) oder wird eine allgemeine angegeben \{Drei,?,?,?\} worunter jedoch auch ein Trike mit Pferdantrieb fallen würde.
+
 \subsection{Beispielmenge}
 Für jede mögliche Ausprägung eines Attributs gibt es jede mögliche Kombination der anderen Attribute. Wir müssen also die Anzahl der möglichen Ausprägungen für jedes Attribut miteinander multiplizieren, und erhalten die Zahl 4 * 3 * 3 * 3 = 108.
+
 \subsection{Mögliche Hypothesen mit Bias}
 Bei Hypothesen kann jedes Attribut entweder genau belegt werden, beliebig sein oder ausgeschlossen. Damit haben wir für die vorherige Rechnung bei jedem Attribut noch zwei weitere Ausprägungen hinzufügen, um die Anzahl der möglichen Hypothesen berechnen zu können: 6 * 5 * 5 * 5 = 750
-Das bedeutet dass wir nicht allzu viele Hypothesen zu überprüfen haben - der Algorithmus sollte nicht lange brauchen die optimale zu finden.
+Das bedeutet dass nicht allzu viele Hypothesen zu überprüfen sind - der Algorithmus sollte nicht lange brauchen die optimale zu finden.
+
 \subsection{Mögliche Hypothesen ohne Bias}
+
 \subsection{Genereller-als}
 Die Hypothesen sind folgendermaßen geordnet (von der generellsten zur spezifischsten): \{?,?,?,?\}, \{Eins,?,?,?\}, \{?,?,,?\}, \{?,Pedal,Blau,?\}
+
+\subsection{FIND-S}
+Auf die Trainingsdaten aus Tabelle 1 am Angabenblatt wird der Find S Algorithmus angewandt.
+\[
+	h_0 = \{,,,\}
+\]
+\subsubsection{1. Schritt}
+Datensatz: $ \{Zwei, Pedal, Gr\ddot{u}n, Wundersch\ddot{o}n\} $\newline
+Neue Hypothese $ h_1 = \{Zwei, Pedal, Gr\ddot{u}n, Wundersch\ddot{o}n\}$
+
+\subsubsection{2. Schritt}
+Datensatz: $ \{Zwei, Pedal, Blau, Wundersch\ddot{o}n\} $\newline
+Neue Hypothese $ h_2 = \{Zwei, Pedal, ?, Wundersch\ddot{o}n\}$
+
+\subsubsection{3. Schritt}
+Datensatz: $ \{Zwei, Motor, Rot, Wundersch\ddot{o}n\} $\newline
+Neue Hypothese $ h_2 = \{Zwei, ?, ?, Wundersch\ddot{o}n\}$
+
+\subsubsection{Ergebnis}
+Der Algorithmus kommt zu folgender Hypothese: $ h = \{Zwei, ?, ?, Wundersch\ddot{o}n\}$
+\paragraph{}
+Das ist wahrscheinlich nicht die beste Hypothese, da auch nicht wunderschöne Räder geeignet sind. Jedoch kommen im Datensatz nur wunderschöne Räder als Positivbeispiele vor, weswegen die Hypothese auch so aussieht.
+
+\subsection{Candidate Elimination Algorithmus}
+Der Candidate Elimination Algorithmus wird auf unsere Daten angewandt.
+\begin{align*}
+	S_0 ?= \{,,,\} \\
+	G_0 ?= \{?,?,?,?\}
+\end{align*}
+
+\subsubsection{1. Schritt}
+Datensatz = $ \{Vier, Pferd, Rot, sch\ddot{o}n\} $
+\paragraph{Vorgehen}
+Da der Datensatz ein Negativbeispiel ist müssen zuerst alle Hypothesen aus S entfernt werden die konsistent mit dem Negativbeispiel sind, die es also nicht ausschließen. Das trifft auf die einzige Hypothese in S nicht zu, daher verändert sich S nicht.
+\paragraph{}
+Aus G müssen alle Hypothesen entfernt werden die nicht konsistent mit dem Negativbeispiel sind, die es also beschreiben. Dies trifft auf die einzige Hypothese in G zu, deshalb wird sie entfernt. Alle minimalen Spezifikationen (jeweils eines der Attribute mit einer der Ausprägungen, ohne die im Beispiel) sind konsistent mit der einzigen Hypothese in S, weswegen alle hinzugefügt werden.
+\paragraph{Neue Hypothesenmengen}
+\begin{align*}
+	S_0 = \{,,,\} \\
+	G_0 = \{ \{Eins,?,?,?\}, \{Zwei,?,?,?\}, \{Drei,?,?,?\}, \\
+	\{?,Pedal,?,?\}, \{?,Motor,?,?\}, \{?,?,Gr\ddot{u}n,?\}, \\ 
+	\{?,?,Blau,?\}, \{?,?,?,h\ddot{a}sslich\}, \{?,?,?,wundersch\ddot{o}n\} \}
+\end{align*}
+
+\subsubsection{2. Schritt}
+Datensatz = $ \{Zwei, Pedal, Gr\ddot{u}n, wundersch\ddot{o}n\} $
+\paragraph{Vorgehen}
+Da der Datensatz ein Positivbeispiel ist müssen zuerst alle Hypothesen aus G entfernt werden die nicht konsistent mit dem Positivbeispiel sind, die es also ausschließen. Das trifft auf alle Hypothesen zu die ein Attribut mit einem anderen Wert als unser Beispiel ausgeprägt haben.
+\paragraph{}
+Aus S müssen wiederum alle Hypothesen entfernt werden die nicht konsistent mit dem Beispiel sind, die es also ausschließen. Das trifft auf die spezifischste Hypothese zu, sie wird also entfernt. Nun müssen noch die geringsten Generalisierungen der entfernten These hinzugefügt werden, die konsistent mit dem Datensatz sind und für die eine These aus G genereller ist. Dies trifft auf den Datensatz als These zu.
+\paragraph{Neue Hypothesenmengen}
+\begin{align*}
+	S_0 = \{Zwei,Pedal,Gr\ddot{u}n,wundersch\ddot{o}n\} \\
+	G_0 = \{ \{Zwei,?,?,?\},\{?,Pedal,?,?\}, \{?,?,Gr\ddot{u}n,?\}, \{?,?,?,wundersch\ddot{o}n\} \}
+\end{align*}
+
+\subsubsection{3. Schritt}
+Datensatz = $ \{Vier, Motor, Gr\ddot{u}n, h\ddot{a}sslich\} $
+\paragraph{Vorgehen}
+Da der Datensatz ein Negativbeispiel ist müssen zuerst alle Hypothesen aus S entfernt werden die konsistent mit dem Negativbeispiel sind, die es also nicht ausschließen. Das trifft auf die einzige Hypothese in S nicht zu, daher verändert sich S nicht.
+\paragraph{}
+Aus G müssen alle Hypothesen entfernt werden die nicht konsistent mit dem Negativbeispiel sind, die es also beschreiben. Dies trifft auf die Hypothese mit Grün als Ausprägung für Farbe zu, diese wird entfernt. Nun werden noch alle Hypothesen hinzugefügt die eine minimale Spezialisierung der entfernten sind, das Beispiel ausschließen und genereller als die Hypthese aus S sind. Da drei Hypothesen Kollegen in G haben, die genereller sind werden sie entfernt.
+\paragraph{Neue Hypothesenmengen}
+\begin{align*}
+	S_0 = \{Zwei,Pedal,Gr\ddot{u}n,wundersch\ddot{o}n\} \\
+	G_0 = \{ \{Zwei,?,?,?\},\{?,Pedal,?,?\}, \{?,?,?,wundersch\ddot{o}n\} \}
+\end{align*}
+
+\subsubsection{4. Schritt}
+Datensatz = $ \{Eins, Motor, Gr\ddot{u}n, sch\ddot{o}n\} $
+\paragraph{Vorgehen}
+Da der Datensatz ein Negativbeispiel ist müssen zuerst alle Hypothesen aus S entfernt werden die konsistent mit dem Negativbeispiel sind, die es also nicht ausschließen. Das trifft auf die einzige Hypothese in S nicht zu, daher verändert sich S nicht.
+\paragraph{}
+Aus G müssen alle Hypothesen entfernt werden die nicht konsistent mit dem Negativbeispiel sind, die es also beschreiben. Dies trifft auf keine Hypothese aus G zu, daher verändert sich G nicht.
+\paragraph{Neue Hypothesenmengen}
+\begin{align*}
+	S_0 = \{Zwei,Pedal,Gr\ddot{u}n,wundersch\ddot{o}n\} \\
+	G_0 = \{ \{Zwei,?,?,?\},\{?,Pedal,?,?\}, \{?,?,?,wundersch\ddot{o}n\} \}
+\end{align*}
+
+\subsubsection{5. Schritt}
+Datensatz = $ \{Zwei, Pedal, Blau, wundersch\ddot{o}n\} $
+\paragraph{Vorgehen}
+Da der Datensatz ein Positivbeispiel ist müssen zuerst alle Hypothesen aus G entfernt werden die nicht konsistent mit dem Positivbeispiel sind, die es also ausschließen. Das trifft auf keine der Hypothesen zu, G verändert sich also nicht.
+\paragraph{}
+Aus S müssen wiederum alle Hypothesen entfernt werden die nicht konsistent mit dem Beispiel sind, die es also ausschließen. Das trifft auf die spezifischste Hypothese zu, sie wird also entfernt. Nun müssen noch die geringsten Generalisierungen der entfernten These hinzugefügt werden, die konsistent mit dem Datensatz sind und für die eine These aus G genereller ist. Dies trifft auf die These zu, welche die Farbe beliebig stellt.
+\paragraph{Neue Hypothesenmengen}
+\begin{align*}
+	S_0 = \{Zwei,Pedal,?,wundersch\ddot{o}n\} \\
+	G_0 = \{ \{Zwei,?,?,?\},\{?,Pedal,?,?\}, \{?,?,?,wundersch\ddot{o}n\} \}
+\end{align*}
+
+\subsubsection{5. Schritt}
+Datensatz = $ \{Zwei, Motor, Rot, wundersch\ddot{o}n\} $
+\paragraph{Vorgehen}
+Da der Datensatz ein Positivbeispiel ist müssen zuerst alle Hypothesen aus G entfernt werden die nicht konsistent mit dem Positivbeispiel sind, die es also ausschließen. Das trifft auf die Hypothese mit der Ausprägung Pedal zu, diese wird also entfernt. 
+\paragraph{}
+Aus S müssen wiederum alle Hypothesen entfernt werden die nicht konsistent mit dem Beispiel sind, die es also ausschließen. Das trifft auf die spezifischste Hypothese zu, sie wird also entfernt. Nun müssen noch die geringsten Generalisierungen der entfernten These hinzugefügt werden, die konsistent mit dem Datensatz sind und für die eine These aus G genereller ist. Dies trifft auf die These zu, welche die Antriebsart beliebig stellt.
+\paragraph{Neue Hypothesenmengen}
+\begin{align*}
+	S_0 = \{Zwei,?,?,wundersch\ddot{o}n\} \\
+	G_0 = \{ \{Zwei,?,?,?\}, \{?,?,?,wundersch\ddot{o}n\} \}
+\end{align*}
+
 \end{document}
