@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.10.29)  23 NOV 2016 16:23
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.11.25)  28 NOV 2016 12:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **abgabe.tex
 (./abgabe.tex
 LaTeX2e <2011/06/27>
-Babel <3.9h> and hyphenation patterns for 78 languages loaded.
+Babel <3.9h> and hyphenation patterns for 4 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
@@ -353,7 +353,7 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 32.
  [2]
-Overfull \hbox (6.4479pt too wide) in paragraph at lines 72--73
+Overfull \hbox (6.4479pt too wide) in paragraph at lines 73--74
 \OT1/cmr/m/n/10 Der Al-go-rith-mus kommt zu fol-gen-der Hy-pothese: $\OML/cmm/m
 /it/10 h \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 Zwei; \OT1/cmr/m/
 n/10 ?\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 ?\OML/cmm/m/it/10 ; Wundersch[]n\OMS/c
@@ -361,19 +361,19 @@ msy/m/n/10 g$
  []
 
 [3] [4]
-Overfull \hbox (1.05963pt too wide) in paragraph at lines 136--137
+Overfull \hbox (1.05963pt too wide) in paragraph at lines 137--138
 \OT1/cmr/m/n/10 sind, die es also auss-chlie^^Yen. Das trifft auf keine der Hy-
 pothe-sen zu, G ver^^?andert
  []
 
 [5] [6] (./abgabe.aux) ) 
 Here is how much of TeX's memory you used:
- 2429 strings out of 493304
- 30847 string characters out of 6139870
- 91599 words of memory out of 5000000
- 5910 multiletter control sequences out of 15000+600000
+ 2429 strings out of 494999
+ 30847 string characters out of 6180227
+ 87409 words of memory out of 5000000
+ 5670 multiletter control sequences out of 15000+600000
  9023 words of font info for 33 fonts, out of 8000000 for 9000
- 957 hyphenation exceptions out of 8191
+ 14 hyphenation exceptions out of 8191
  27i,9n,32p,501b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
@@ -383,7 +383,7 @@ nts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on abgabe.pdf (6 pages, 113314 bytes).
+Output written on abgabe.pdf (6 pages, 114225 bytes).
 PDF statistics:
  55 PDF objects out of 1000 (max. 8388607)
  38 compressed objects within 1 object stream

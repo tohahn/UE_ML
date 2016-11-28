@@ -47,6 +47,7 @@ Bei Hypothesen kann jedes Attribut entweder genau belegt werden, beliebig sein o
 Das bedeutet dass nicht allzu viele Hypothesen zu überprüfen sind - der Algorithmus sollte nicht lange brauchen die optimale zu finden.
 
 \subsection{Mögliche Hypothesen ohne Bias}
+Ohne Bias können wir für eine Beobachtung nie sagen ob sie nun zu einer generelleren Aussage führt, deswegen können wir neue Beobachtungen immer nur mit den alten verunden. Dies führt zu einem Hypothesenraum von $2^108$ da jede mögliche Belegung der Attribute entweder in der Und-Kette vorhanden sein kann oder nicht. Das sind sehr sehr viele Hypothesen, ca. $3* 10^32$.
 
 \subsection{Genereller-als}
 Die Hypothesen sind folgendermaßen geordnet (von der generellsten zur spezifischsten): \{?,?,?,?\}, \{Eins,?,?,?\}, \{?,?,,?\}, \{?,Pedal,Blau,?\}
@@ -142,7 +143,7 @@ Aus S müssen wiederum alle Hypothesen entfernt werden die nicht konsistent mit 
 	G_0 = \{ \{Zwei,?,?,?\},\{?,Pedal,?,?\}, \{?,?,?,wundersch\ddot{o}n\} \}
 \end{align*}
 
-\subsubsection{5. Schritt}
+\subsubsection{6. Schritt}
 Datensatz = $ \{Zwei, Motor, Rot, wundersch\ddot{o}n\} $
 \paragraph{Vorgehen}
 Da der Datensatz ein Positivbeispiel ist müssen zuerst alle Hypothesen aus G entfernt werden die nicht konsistent mit dem Positivbeispiel sind, die es also ausschließen. Das trifft auf die Hypothese mit der Ausprägung Pedal zu, diese wird also entfernt. 
@@ -153,5 +154,7 @@ Aus S müssen wiederum alle Hypothesen entfernt werden die nicht konsistent mit 
 	S_0 = \{Zwei,?,?,wundersch\ddot{o}n\} \\
 	G_0 = \{ \{Zwei,?,?,?\}, \{?,?,?,wundersch\ddot{o}n\} \}
 \end{align*}
+\paragraph{Deutung}
+Dieses Ergebnis ergibt, dass Fahrradkuriere zweirädrige, wunderschöne Fortbewegungsmittel bevorzugen.
 
 \end{document}
