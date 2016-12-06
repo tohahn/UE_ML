@@ -73,6 +73,7 @@ TW & 0.33 \\\hline
 \captionof{table}{A priori Wahrscheinlichkeiten}
 
 \subsection{FORWARD-Algorithmus}
+\subsubsection{Berechnungen}
 \begin{lstlisting}
 Calculations
 P(KAE|Ole) = P(Ole|KAE) * (P(KAE|KAE) * P(KAE) + P(KAE|TW) * P(TW) + P(KAE|TG) * P(TG)) = 0.26664 ~= 0.824742268041
@@ -233,6 +234,8 @@ Scores
 +-------+--------------------+
 | 0:5   | 0.000              |
 +-------+--------------------+
-
 \end{lstlisting}
+
+\subsubsection{A priori Verteilung}
+Die Wahl einer gleichverteilten a priori Verteilung erscheint mir sinnvoll, da man ja am Anfang nichts über das Spiel weiß und daher auch keine Annahmen darüber treffen sollte. Nun könnte man natürlich auch sagen dass man schon etwas allgemeines über das Spiel aussagen könnte, wie z.B. dass Werder Bremen eine eher schlechte Mannschaft ist, dass daher die a priori Wahrscheinlichkeit für TW niedriger, die a priori Wahrscheinlichkeit für TG eher höher angesetzt werden sollte. Andererseits könnte man behaupten dass es relativ sicher ist dass es ein Geräusch gibt wenn ein Tor fällt, dass also die Wahrscheinlichkeit für TW und TG vor dem ersten Geräusch ziemlich niedrig ist. 
 \end{document}

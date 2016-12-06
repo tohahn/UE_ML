@@ -7,7 +7,6 @@
 
 \lstset{
 	basicstyle=\footnotesize,
-	numbers=false,
 	tabsize=3,
 	title=\lstname,
 	breaklines=true
@@ -74,6 +73,7 @@ TW & 0.33 \\\hline
 \captionof{table}{A priori Wahrscheinlichkeiten}
 
 \subsection{FORWARD-Algorithmus}
+\subsubsection{Berechnungen}
 \begin{lstlisting}
 Calculations
 P(KAE|Ole) = P(Ole|KAE) * (P(KAE|KAE) * P(KAE) + P(KAE|TW) * P(TW) + P(KAE|TG) * P(TG)) = 0.26664 ~= 0.824742268041
@@ -234,6 +234,8 @@ Scores
 +-------+--------------------+
 | 0:5   | 0.000              |
 +-------+--------------------+
-
 \end{lstlisting}
+
+\subsubsection{A priori Verteilung}
+
 \end{document}
