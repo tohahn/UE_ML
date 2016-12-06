@@ -1,11 +1,21 @@
 import java.util.ArrayList;
 
 public class BayesNode {
+	// Name des Attributs, das in dem Knoten kodiert wird
 	private String attributeName;
+	//Ausprägungsklassen des Elternknotens (aka. die jeweiligen Algorithmen)
 	private ArrayList<String> parentClasses;
+	//Eigene Ausprägungen (bei Noise z.B. low, high, none
 	private ArrayList<String> myClasses;
+	//Die Wahrscheinlichkeitstabelle P(a|b) im Format [b][a]
 	private float[][] probabilityTable;
 
+	/**
+	 * Erstellt einen neuen Knoten für einen naive Bayes
+	 * @param name Name des Attributs, welches der Knoten kodiert
+	 * @param pClasses Ausprägungsklassen des Elternknotens
+	 * @param mClasses Eigene Ausprägungsklassen
+	 */
 	BayesNode(String name, ArrayList<String> pClasses,ArrayList<String> mClasses){
 		attributeName= name;
 		probabilityTable = new float[pClasses.size()][mClasses.size()];
@@ -13,7 +23,13 @@ public class BayesNode {
 		myClasses=mClasses;
 		
 	}
-
+	/**
+	 * Fügt eine Neue Wahrscheinlichkeit P(a|b) in die Wahrscheinlichkeitstabelle ein.
+	 * @param pClass b
+	 * @param mClass a 
+	 * @param prob P(a|b)
+	 * @return 1 wenn erfolgreich
+	 */
 	public int addProb(String pClass, String mClass, float prob){
 		if(parentClasses.indexOf(pClass)!=-1){
 			if(myClasses.indexOf(mClass)!=-1){
@@ -34,6 +50,9 @@ public class BayesNode {
 		return attributeName;
 	}
 	
+	/**
+	 *  Methode zum "verbessern" eines Naive bayes indem die Niedrigste Wahrscheinlichket statt 0 1 wird.
+	 */
 	public void fixNode(){
 		for(int x = 0; x< probabilityTable.length ; x++){
 			for(int y = 0; y< probabilityTable[x].length ; y++){
