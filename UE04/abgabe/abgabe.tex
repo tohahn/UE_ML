@@ -171,7 +171,7 @@ Um die Markov-Kette auf zu stellen müssen zunächst die Transitionswahrscheinli
 Bei dieser Berechnung ist zu beachten, dass das erste G in der Liste der Spielergebnissen nicht mitgezählt werden kann, weil es noch keinen vorhergehenden Zustand hat.\\
 Diese Rechnung soll nun ein mal exemplarisch für $P(G|G)$,$P(G|V)$ und $P(G|U)$ vorgerechnet werden. Man benötigt dafür die Anzahlen von $n_{G,G}$, $n_{U,G}$ und $n_{V,G}$ sowie die Summe $\sum_{X=0}^k n_{X,A}$ über alle k Kategorien. Wir suchen zunächst $n_{V,G}$ und markieren sie: \\
 G-\textbf{V-G}-\textbf{V-G}-V-U-\textbf{V-G}-V-V\\
-Es gibt also drei solcher Übergänge. Die Übergägne $n_{G,G}$ und $n_{U,G}$ sind nei zu finden:\\
+Es gibt also drei solcher Übergänge. Die Übergägne $n_{G,G}$ und $n_{U,G}$ sind nie zu finden:\\
 G-V-G-V-G-V-U-V-G-V-V\\
 Insgesamt ergibt sich also für die Anzalh der $n_{X,A}$ auch drei. Nun berechnen wir die Transitionswahrscheinlichkeit $P(G|V)$:
 \[P(G|V)= \frac 3 3 = 1  \]\\
