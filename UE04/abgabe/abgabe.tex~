@@ -4,6 +4,12 @@
 \usepackage{amsmath}
 \usepackage{listings}
 \usepackage{caption}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{placeins}
+\graphicspath{ {results/} }
+\usepackage{forest}
 
 \lstset{
 	basicstyle=\footnotesize,
@@ -47,7 +53,6 @@ Wurf(W6) & P(Wurf(W6)) \\\hline
 Das Sensormodell hat die Aufgabe, uns für einen Zustand anzugeben welche Beobachtungen wie wahrscheinlich sind. Hier ist es allgemein so, dass bei dem Zustand für den Wurf mit W6 jeweils die Augenzahlen der jeweiligen Würfel gleich wahrscheinlich sind. D.h. wenn der Zustand 1 ist, dann sind 1-4 die möglichen Beobachtungen mit jeweils ein Viertel Wahrscheinlichkeit. Die einzige Ausnahme ist Zustand 2, da sich hier der W6 selber auswählt, wir also schon wissen dass die Beobachtung 2 ist. Dementsprechend sehen die Sensormodelle so aus:
 
 \subsubsection{Sensormodell}
-\subsubsection{Transitionsmodell}
 \begin{tabular}{|c|c|c|}
 \hline
 Beobachtung x & Zustand y & P(x|y) \\\hline
@@ -73,6 +78,102 @@ Beobachtung x & Zustand y & P(x|y) \\\hline
 
 
 \section{Markov Ketten}
+\subsection{A-priori-Wahrscheinlichkeiten}
+Die A-priori-Wahrscheinlichkeiten  berechnen sich einfach aus der Divison der Anzahl eines Merkmals geteilt durch die Anzahl aller Merkmale.\\
+\begin{tabular}{|c|c|c|}
+\hline
+G & V & U \\\hline
+$\frac{4}{11} $&$ \frac{6}{11} $&$ \frac{1}{11} $\\\hline
+\end{tabular}
+
+\subsection{Vorhersage der ersten Spieltage}
+Um die Markov-Kette auf zu stellen müssen zunächst die Transitionswahrscheinlichkeiten angegeben werden. Um die Transitionswahrscheinlichkeit für $P(A|B)$ zu errechnen gegeben $n_{B,A}$, der Anzahle aller Übergänge von B nach A und $n_{X,A}$ die Anzahl aller Übergänge von einem beliebigen Zustand X nach A sowie k die Anzahl der möglichen Zustände dann errechnet sich $P(A|B)$ als: \\
+\[ P(A|B)= \frac{n_{X,A}}{\sum_{X=0}^k n_{X,A}} \] \\
+Bei dieser Berechnung ist zu beachten, dass das erste G in der Liste der Spielergebnissen nicht mitgezählt werden kann, weil es noch keinen vorhergehenden Zustand hat.\\
+Diese Rechnung soll nun ein mal exemplarisch für $P(G|G)$,$P(G|V)$ und $P(G|U)$ vorgerechnet werden. Man benötigt dafür die Anzahlen von $n_{G,G}$, $n_{U,G}$ und $n_{V,G}$ sowie die Summe $\sum_{X=0}^k n_{X,A}$ über alle k Kategorien. Wir suchen zunächst $n_{V,G}$ und markieren sie: \\
+G-\textbf{V-G}-\textbf{V-G}-V-U-\textbf{V-G}-V-V\\
+Es gibt also drei solcher Übergänge. Die Übergägne $n_{G,G}$ und $n_{U,G}$ sind nei zu finden:\\
+G-V-G-V-G-V-U-V-G-V-V\\
+Insgesamt ergibt sich also für die Anzalh der $n_{X,A}$ auch drei. Nun berechnen wir die Transitionswahrscheinlichkeit $P(G|V)$:
+\[P(G|V)= \frac 3 3 = 1  \]\\
+Für die anderen beiden Transitionswahrscheinlichkeiten ergibt sich:\\
+ \[P(G|G)=P(G|U)= \frac 0 3 = 0  \]\\
+Für die restlichen Klassen ergeben sich die folgenden Transitionswahrscheinlichkeiten:\\
+\\
+\begin{tabular}{|c|c|c|}
+\hline
+$P(G|G)=\frac{0}{3}=0$ & $P(U|G)=\frac{0}{1}=0$ & $P(V|G)=\frac{4}{6}\approx 0,6$ \\\hline
+$P(G|V)=\frac{3}{3}=1$ & $P(U|V)=\frac{1}{1}=1$ & $P(V|V)=\frac{1}{6}\approx 0,2$\\\hline
+$P(G|U)=\frac{0}{3}=0$ & $P(U|U)=\frac{0}{1}=0$ & $P(V|U)=\frac{1}{6}\approx 0,2$\\\hline
+\end{tabular}
+Nun kann man in einen Baum die Möglichen Spielergebnisse eintragen. An den Kanten bezeichnet man das jeweilige Ergebniss und in den Knoten findet man die zugehörige Transitionswahrscheinlichkeit bzw. Initialwahrscheinlichkeit.\\
+\begin{forest}
+    rounded/.style={ellipse split, draw},
+    squared/.style={rectangle,draw}
+  [,for tree={grow'=east}
+    [{\tiny P(G)=0.9}, edge label={node[midway,below,font=\scriptsize]{G}} 
+    	[
+    	{\tiny P(G|G)=0}, edge label={node[midway,below,font=\scriptsize]{G}}
+        ] [
+        {\tiny P(U|G)=0}, edge label={node[midway,below,font=\scriptsize]{U}}
+        ] [
+        {\tiny P(V|G)=0,66}, edge label={node[midway,below,font=\scriptsize]{V}}
+        	[
+    		{\tiny P(G|V)=1}, edge label={node[midway,below,font=\scriptsize]{G}}
+        	] [
+        	{\tiny P(U|V)=1}, edge label={node[midway,below,font=\scriptsize]{U}}
+        	] [
+        	{\tiny P(V|V)=0.16}, edge label={node[midway,below,font=\scriptsize]{V}}
+        	] 
+        ]
+    ]
+    [{\tiny P(V)=0.1}, edge label={node[midway,below,font=\scriptsize]{V}} 
+   		 [
+    	{\tiny P(G|V)=1}, edge label={node[midway,below,font=\scriptsize]{G}}
+        	[
+    		{\tiny 0}, edge label={node[midway,below,font=\scriptsize]{G}}
+        	] [
+        	{\tiny 0}, edge label={node[midway,below,font=\scriptsize]{U}}
+        	] [
+        	{\tiny P(V|G)=0.66}, edge label={node[midway,below,font=\scriptsize]{V}}
+        	] 
+        ] [
+        {\tiny P(U|V)=1}, edge label={node[midway,below,font=\scriptsize]{U}}
+        	[
+    		{\tiny 0}, edge label={node[midway,below,font=\scriptsize]{G}}
+        	] [
+        	{\tiny 0}, edge label={node[midway,below,font=\scriptsize]{U}}
+        	] [
+        	{\tiny P(V|U)=0.16}, edge label={node[midway,below,font=\scriptsize]{V}}
+        	] 
+        ] [
+        {\tiny P(V|V)=0.16}, edge label={node[midway,below,font=\scriptsize]{V}}
+        	[
+    		{\tiny P(G|V)=1}, edge label={node[midway,below,font=\scriptsize]{G}}
+        	] [
+        	{\tiny P(U|V)=1}, edge label={node[midway,below,font=\scriptsize]{U}}
+        	] [
+        	{\tiny P(V|V)=0.16}, edge label={node[midway,below,font=\scriptsize]{V}}
+        	] 
+        ] 
+    ]
+  ]
+\end{forest}
+\\
+Interessiert man sich nun für die Wahrscheinlichkeiten der möglichen Ergebnisse kann man einfach den baum entlang gehen und die Wahrscheinlichkeiten aufmultiplizieren:\\
+\begin{tabular}{|c|c|c|c|}
+\hline
+$P(G,V,G)$ & $P(G)*P(V|G)*P(G|V)$ & $0.9*\frac{4}{6}*1=$ &$0.6$\\\hline
+$P(G,V,V)$ & $P(G)*P(V|G)*P(V|V)$ & $0.9*\frac{4}{6}*\frac{1}{6}=$ &$0.1$\\\hline
+$P(G,V,U)$ & $P(G)*P(V|G)*P(U|V)$ & $0.9*\frac{4}{6}*1=$ &$0.6$\\\hline
+$P(V,G,V)$ & $P(V)*P(G|V)*P(V|G)$ & $0.1*1*\frac{4}{6}=$ &$0.06$\\\hline
+$P(V,V,G)$ & $P(V)*P(V|V)*P(G|V)$ & $0.1*\frac{1}{6}*1=$ &$0.016$\\\hline
+$P(V,V,U)$ & $P(V)*P(V|V)*P(U|V)$ & $0.1*\frac{1}{6}*1=$ &$0.016$\\\hline
+$P(V,V,V)$ & $P(V)*P(V|V)*P(V|V)$ & $0.1*\frac{1}{6}*\frac{1}{6}=$ &$0.003$\\\hline
+$P(V,U,V)$ & $P(V)*P(U|V)*P(V|U)$ & $0.1*1*\frac{1}{6}=$ &$0.016$\\\hline
+
+\end{tabular}
+
 
 \section{Hidden Markov Modell}
 
