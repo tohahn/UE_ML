@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{listings}
+\usepackage{tikz}
 
 \lstset{
 	basicstyle=\footnotesize,
@@ -26,6 +27,20 @@
 \begin{document}
 \maketitle
 \newpage
+\section*{Fragen}
+\subsection{POMDP}
+In einem MDP geht es darum, dass ein Agent aufgrund von Beobachtungen über die Welt sequentielle Entscheidungen trifft, und dabei entweder das Risiko minimiert oder den Ertrag maximiert. Dabei wird davon ausgegangen, dass die Welt direkt beobachtbar ist, dass also die Zustände vom Agenten eindeutig festgestellt werden können.
+\paragraph{}
+Beim POMDP hingegen wird davon ausgegangen, dass der Agent den Zustand der Welt nicht direkt feststellen kann, sondern nur aufgrund von den Beobachtungen die er macht die Wahrscheinlichkeit von mehreren möglichen Zuständen abschätzen kann. Nun sollen die getroffenen Entscheidungen nicht mehr einfach Risiko minimieren oder maximieren, sondern das jeweilige Ziel optimal erreichen für das mit der Wahrscheinlichkeit gewichtete Mittel über alle möglichen Zustände.
+\paragraph{}
+Dazu passt das Markov Hidden Model. Dies teilt den Grundgedanken, dass der Zustand der Welt nicht direkt sichtbar ist, sondern man nur Beobachtungen machen kann, und von denen aus auf eine gewisse Wahrscheinlichkeit des Zustands der Welt schließen kann. Wir haben das gemacht anhand eines Fußballspiels, welches man nicht direkt beobachten, sondern nur die hörbare Reaktion der Fans feststellen kann. Bei einem POMDP würde man darüber hinaus noch Aktionen haben, welche je nach Zustand andere Ergebnisse zeitigen, und müsste dann mit dem Wahrscheinlichkeitswissen über die versteckten Zustände den jeweils besten auswählen.
+
+\subsection{EM}
+Der EM-Algorithmus beschreibt eine Vorgehensweise, um Parameter in einem Modell so optimal auszuwählen, dass sie die vorliegenden Daten am besten beschreiben.
+Dabei wird im Expectation-Schritt eine Funktion gefunden, welche die Wahrscheinlichkeit der vorgefundenen Daten mit dem Modell unter den bisherigen Parametern beschreibt. Im Maximization-Schritt werden die neuen Parameter gefunden, indem die vorher aufgestellte Funktion mit Respekt zu den Parametern maximiert wird, also die Parameter gefunden werden welche das Auftauchen der Trainingsdaten maximiert.
+\paragraph{}
+Dabei kann der EM-Algorithmus nur dann angewendet werden, wenn bereits ein Modell bekannt ist, oder zumindest angenommen wird dass die Daten einem Modell folgen, sowie dieses Modell auf einigen wenigen unbekannten Parametern beruht, für welche dann maximiert werden kann. Geeignet sind also vor allem Wahrscheinlichkeitsmodelle aus der Statistik, wie Gaussche Verteilungen oder Poisson Verteilung.
+
 \section{Markov Decision Processes}
 
 \section{Perzeptron}
@@ -48,11 +63,25 @@ Zuerst muss die Aktivierung des Perzeptrons berechnet werden. Dazu brauchen wir 
 
 Nachdem nun die Aktivierung des Perzeptrons feststeht muss der Fehler berechnet werden. Hierzu verwenden wir den quadrierten Fehler, also das Quadrat des Unterschieds zwischen der erwarteten Ausgabe und der tatsächlichen.
 \[
-	Fehler = (o - O)^2 = (0.5 - 0)^2 = 0.25
+	Fehler = \frac{1}{2} * (o - O)^2 = 0.5 * (0.5 - 0)^2 = 0.125
 \]
 
 Um nun die Gewichte anzupassen müssen wir uns zuerst den Gradienten ausrechnen.
-Der Gradient baut auf auf dem Fehler der Ausgabe sowie den Ableitungen der Aktivierungsfunktion. Außerdem baut er auf auf dem Input. Die Formeln für den Gradienten sind:
+Der Gradient baut auf auf dem Fehler der Ausgabe sowie den Ableitungen der Aktivierungsfunktion. Außerdem baut er auf auf dem Input.
+\paragraph{}
+Um den Gradienten der Fehlerfunktion bezüglich der Gewichte zu berechnen müssen wir zuerst einmal die Fehlerfunktion bezüglich dieses Gewichts ableiten. Dies geschieht folgendermaßen (hier am Beispiel Gewicht 1 - o steht für die wahre Ausgabe, y für das Ergebnis der Linearen Gleichung):
+\begin{align*}
+	&\frac{\partial E}{\partial w_1} E(o - \sigma(y)) \\ 
+	&= \frac{\partial E}{\partial w_1} \frac{1}{2}(o - \sigma(y))^2 \\
+	&= (o - \sigma(y)) * (\frac{\partial E}{\partial w_1}o - \frac{\partial E}{\partial w_1}\sigma(y)) \\
+	&= (o - \sigma(y)) * -(\sigma(y) * (1 - \sigma(y)) * \frac{\partial E}{\partial w_1}(w_0*I_0 + w_1*I_1-w_2) \\
+	&= (o - \sigma(y)) * -(\sigma(y) * (1 - \sigma(y))) * I_1 \\
+	&= Fehler * \sigma(y) * (1 - \sigma(y)) * I_1 
+\end{align*}
+\paragraph{}
+Für die anderen Gewichte müsste man jeweils noch den Index des Signals ändern.
+Der Einfachheit halber wurde das Vorzeichen bei der Ableitung der Sigmoidfunktion weggelassen. Dafür muss beim Gradientenabstieg der Gradient einfach abgezogen werden, statt dazugezählt.
+
 \begin{align*}
 	\frac{\delta E}{\delta w_0} &= \sigma(y) * (1 - \sigma(y)) * Fehler * I_0 = 0.5 * 0.5 * 0.5 * 0 = 0 \\
 	\frac{\delta E}{\delta w_1} &= \sigma(y) * (1 - \sigma(y)) * Fehler * I_1 = 0.5 * 0.5 * 0.5 * 0 = 0 \\
@@ -81,7 +110,7 @@ Zuerst muss die Aktivierung des Perzeptrons berechnet werden. Dazu brauchen wir 
 
 Nachdem nun die Aktivierung des Perzeptrons feststeht muss der Fehler berechnet werden. Hierzu verwenden wir den quadrierten Fehler, also das Quadrat des Unterschieds zwischen der erwarteten Ausgabe und der tatsächlichen.
 \[
-	Fehler = (o - O)^2 = (0.2227 - 1)^2 = -0.7773^2 = 0.6
+	Fehler = \frac{1}{2} * (o - O)^2 = 0.5 * (0.2227 - 1)^2 = 0.5 * -0.7773^2 = 0.3
 \]
 
 Um nun die Gewichte anzupassen müssen wir uns zuerst den Gradienten ausrechnen.
@@ -115,7 +144,7 @@ Zuerst muss die Aktivierung des Perzeptrons berechnet werden. Dazu brauchen wir 
 
 Nachdem nun die Aktivierung des Perzeptrons feststeht muss der Fehler berechnet werden. Hierzu verwenden wir den quadrierten Fehler, also das Quadrat des Unterschieds zwischen der erwarteten Ausgabe und der tatsächlichen.
 \[
-	Fehler = (o - O)^2 = (0.524 - 1)^2 = -0.476^2 = 0.227
+	Fehler = \frac{1}{2} * (o - O)^2 = 0.5 * (0.524 - 1)^2 = 0.5 * -0.476^2 = 0.11135
 \]
 
 Um nun die Gewichte anzupassen müssen wir uns zuerst den Gradienten ausrechnen.
@@ -149,10 +178,19 @@ Zuerst muss die Aktivierung des Perzeptrons berechnet werden. Dazu brauchen wir 
 
 Nachdem nun die Aktivierung des Perzeptrons feststeht muss der Fehler berechnet werden. Hierzu verwenden wir den quadrierten Fehler, also das Quadrat des Unterschieds zwischen der erwarteten Ausgabe und der tatsächlichen.
 \[
-	Fehler = (o - O)^2 = (0.92 - 1)^2 = -0.08^2 = 0.0064
+	Fehler = \frac{1}{2} * (o - O)^2 = 0.5 * (0.92 - 1)^2 = 0.5 * -0.08^2 = 0.0032
 \]
 
 Damit ist der quadrierte Fehler unter 0.1 gesunken, was in der Angabe als Abbruchbedingung eingeführt wurde. Damit sind die Gewichte, die wir herausgefunden haben, auch die tatsächlichen, und wir können mit den Berechnungen aufhören.
+
+\paragraph{Plot}
+Um zu veranschaulichen zu welchem Ergebnis wir gekommen sind, hier ein Plot der Linearen Funktion welche von den Gewichten beschrieben wird:
+
+\begin{tikzpicture}
+	\draw[->] (-3,0) -- (4.2,0) node[right] {$x$};
+	\draw[->] (0,-3) -- (0,4.2) node[above] {$y$};
+	\draw[scale=0.5,domain=-3:3,smooth,variable=\x,blue] plot ({\x},{-0.37*\x - 0.45});
+\end{tikzpicture}
 
 \subsection{Beispiele}
 Laut Angabe sollen noch zwei Beispieleingaben durchgerechnet werden, und die Ergebnisse interpretiert. Dies geschieht hier.
