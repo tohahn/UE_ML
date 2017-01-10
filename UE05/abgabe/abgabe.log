@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2017.1.3)  10 JAN 2017 19:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2017.1.3)  10 JAN 2017 19:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -801,30 +801,58 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 )) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] (./abg
-abe.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+(/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+Overfull \hbox (17.95078pt too wide) in paragraph at lines 61--62
+\OT1/cmr/m/n/10 Die Po-li-cy wird bei un-se-rer Im-ple-men-tie-rung di-rekt von
+ der Ma-schie-ne er-rech-net. In der Me-tho-de \OT1/cmtt/m/n/10 determineMax()
+ []
+
+[2]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 64.
+ (/usr/share/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 64.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 64.
+
+(/usr/share/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 64.
+ [3] [4] [5] [6] [7] [8]
+(./abgabe.aux) ) 
 Here is how much of TeX's memory you used:
- 14205 strings out of 493013
- 267216 string characters out of 6139318
- 319650 words of memory out of 5000000
- 17491 multiletter control sequences out of 15000+600000
- 9023 words of font info for 33 fonts, out of 8000000 for 9000
+ 14628 strings out of 493013
+ 271260 string characters out of 6139318
+ 459544 words of memory out of 5000000
+ 17901 multiletter control sequences out of 15000+600000
+ 9852 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,9n,54p,738b,505s stack positions out of 5000i,500n,10000p,200000b,80000s
- </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmbx10.pk> <
-/usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk> </usr/share/te
-xmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy7.pk> </usr/share/texmf-dist/font
-s/pk/ljfour/public/cm/dpi600/cmsy10.pk> </usr/share/texmf-dist/fonts/pk/ljfour/
-public/cm/dpi600/cmr7.pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi6
-00/cmmi10.pk> </home/tobias/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12
-.600pk> </home/tobias/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.720pk
-> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr10.pk> </usr/share
-/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr12.pk> </usr/share/texmf-dist/f
-onts/pk/ljfour/public/cm/dpi600/cmr17.pk>
-Output written on abgabe.pdf (6 pages, 74115 bytes).
+ 55i,9n,54p,738b,1713s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmbx10
+.pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk> </usr/sh
+are/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy7.pk> </usr/share/texmf-dis
+t/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk> </usr/share/texmf-dist/fonts/pk/l
+jfour/public/cm/dpi600/cmr7.pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/c
+m/dpi600/cmmi10.pk> </home/tobias/.texlive/texmf-var/fonts/pk/ljfour/public/cm/
+cmmi8.600pk> </home/tobias/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmbx8.6
+00pk> </home/tobias/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmti8.600pk> <
+/home/tobias/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmtt10.600pk> </home/
+tobias/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmsy8.600pk> </usr/share/te
+xmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr8.pk> </home/tobias/.texlive/texmf
+-var/fonts/pk/ljfour/public/cm/cmbx12.600pk> </home/tobias/.texlive/texmf-var/f
+onts/pk/ljfour/public/cm/cmbx12.720pk> </usr/share/texmf-dist/fonts/pk/ljfour/p
+ublic/cm/dpi600/cmr10.pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi6
+00/cmr12.pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr17.pk>
+Output written on abgabe.pdf (8 pages, 113319 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 61 compressed objects within 1 object stream
+ 414 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
