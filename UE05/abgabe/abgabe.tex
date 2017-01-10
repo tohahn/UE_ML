@@ -26,8 +26,123 @@
 \begin{document}
 \maketitle
 \newpage
-\section{Markov Decision Processes}
 
+
+\section{Markov Decision Process}
+\lstset{numbers=none}
+\subsection{Utility Werte}
+Das Programm liefert nach 100 Iterationen ohne Discount folgende Utility Werte
+\begin{lstlisting}
+Aufgabe 1: Utilities
+0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	
+0.000000 	0.553117 	0.664085 	0.801122 	1.000000 	0.000000 	
+0.000000 	0.454988 	0.000000 	-0.410327 	-15.000000 	0.000000 	
+0.000000 	0.374899 	0.298694 	0.146246 	-0.899763 	0.000000 	
+0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	
+\end{lstlisting}
+Um die eigentlichen Werte ist ein Ring aus Nullen, welche nicht betretbare Zustände sind. Die Terminalzustände behalten als Utility ihre Initialwerte.
+\subsection{Policy}
+Die Policy wird bei unserer Implementierung direkt von der Maschiene errechnet. In der Methode \texttt{determineMax()} wird bei der Bestimmung der Besten Aktion für das Update der Utility werte auch die Richtungsentscheidung direkt als Policy gespeichert:
+\begin{lstlisting}[language=Java]
+//d is the currently tested Direction
+if(sum>currentMax){
+					currentMax=sum;
+					policy[y][x]=d;
+				}
+\end{lstlisting}
+Dadurch ist die Policy ohne Discount nach 100 Iterationen:
+\begin{lstlisting}
+Aufgabe 2: Policies
+null	null	null	null	null	null	
+null	RIGHT	RIGHT	RIGHT	null	null	
+null	UP		null	UP		null	null	
+null	UP		LEFT	LEFT	DOWN	null	
+null	null	null	null	null	null	
+\end{lstlisting}
+\subsection{Discount}
+Das Programm findet atomatisch die erste Policy, welche von der Obigen abweiche. Es reduziert dazu den discount bei jeder Wiederholung om \texttt{0.01}
+\begin{lstlisting}
+Aufgabe3
+Policy changed at: 0.65000033  To:
+null	null	null	null	null	null	
+null	RIGHT	RIGHT	RIGHT	null	null	
+null	UP		null	UP		null	null	
+null	UP		LEFT	DOWN	DOWN	null	
+null	null	null	null	null	null	
+From: 
+null	null	null	null	null	null	
+null	RIGHT	RIGHT	RIGHT	null	null	
+null	UP		null	UP		null	null	
+null	UP		LEFT	LEFT	DOWN	null	
+null	null	null	null	null	null	
+\end{lstlisting}
+Es ändert sich lediglich die Zelle \texttt{(4,3)} Von \texttt{DOWN} zu \texttt{LEFT}, was die Policy etwas gieriger und mutiger macht, da so auch die möglichkeit besteht auf dem Feld neben den Bahngleisen bzw. der Weser zu landen.
+
+\subsection{Reward Weser}
+Ändert man die Belohnung für die Weser auf \texttt{-300} und setzt den Discount wieder auf \texttt{0}, so wird die Policy nach 100 Iterationen zu ängstlich und kann tatsächlich nie zum Ziel kommen. Durch zwei Unvorhergesehene Schritte könnte der komilitone zwar gemäß der Policy in die obere Linke Ecke kommen, von dort aus würde er sich jedoch niemals nach Rechts bewegen. Die Schritte dort hin werden bereits als zu gefährlich eingeschätzt.
+\begin{lstlisting}
+Reward fuer Fluss auf -300
+0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	
+0.000000 	-0.013574 	-0.045074 	-0.487489 	1.000000 	0.000000 	
+0.000000 	-0.012425 	0.000000 	-18.211212 	-300.000000 	0.000000 	
+0.000000 	-0.021074 	-0.170078 	-2.386974 	-18.177088 	0.000000 	
+0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	
+
+null	null	null	null	null	null	
+null	LEFT	UP		RIGHT	null	null	
+null	RIGHT	null	LEFT	null	null	
+null	LEFT	LEFT	DOWN	DOWN	null	
+null	null	null	null	null	null	
+\end{lstlisting}
+Ändert man hingegen die Belohnung für das Feld Weser auf \texttt{-3} so wird die Policy sehr mutig und würde sogar den Weg unterhalb des \texttt{X} nehmen um zum Ziel zu Kommen, direkt an der Weser vorbei.
+\begin{lstlisting}
+ Reward fuer Fluss auf -2
+0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	
+0.000000 	0.605438 	0.725594 	0.874084 	1.000000 	0.000000 	
+0.000000 	0.499468 	0.000000 	0.579265 	-2.000000 	0.000000 	
+0.000000 	0.418631 	0.415091 	0.499967 	0.249973 	0.000000 	
+0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	
+
+null	null	null	null	null	null	
+null	RIGHT	RIGHT	RIGHT	null	null	
+null	UP	null	UP	null	null	
+null	UP	RIGHT	UP	LEFT	null	
+null	null	null	null	null	null	
+\end{lstlisting}
+\subsection{Delta als Terminierungskriterium}
+Sieht man sich die beiden Policys, welche mit den aus der Aufgabenstellung geforderten Parametern kreiert werden sieht man dass sie sich nicht ändern:
+\begin{lstlisting}
+ Reward fuer Fluss auf -1000, Abbruch bei delta < 0.02
+0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	
+0.000000 	-0.025381 	-0.237923 	-3.480986 	1.000000 	0.000000 	
+0.000000 	-0.014538 	0.000000 	-60.808903 	-1000.000000 	0.000000 	
+0.000000 	-0.042222 	-0.518717 	-7.934514 	-60.565323 	0.000000 	
+0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	0.000000 	
+
+null	null	null	null	null	null	
+null	LEFT	LEFT	RIGHT	null	null	
+null	RIGHT	null	LEFT	null	null	
+null	LEFT	LEFT	DOWN	DOWN	null	
+null	null	null	null	null	null	
+
+ Reward fuer Fluss auf -1000, Abbruch bei delta < 0.002
+null	null	null	null	null	null	
+null	LEFT	LEFT	RIGHT	null	null	
+null	RIGHT	null	LEFT	null	null	
+null	LEFT	LEFT	DOWN	DOWN	null	
+null	null	null	null	null	null	
+
+\end{lstlisting}
+Lässt man sich auf der Konsole die Deltawerte der Iterationen ausgeben so sieht man, dass beide Settings genau gleich viele Iterationen erzeugen:
+\begin{lstlisting}
+ 60.009403228759766 7.7939229011535645 0.8440335392951965 0.5087775588035583
+ 0.41358691453933716 0.32908210158348083 0.2648226022720337 0.2159448266029358
+ 0.17371797561645508 0.13288389146327972 0.10694222152233124 0.07113255560398102
+ 0.057297706604003906 0.025176461786031723 0.02035154402256012 0.00145682692527771
+\end{lstlisting}
+
+Beide male ist der Vorletzte Schritt über \texttt{0.02} und der nächste bereits unter \texttt{0.002}. Deshalb sind auch die Policies entsprechend gleich.
+\lstset{numbers=left}
 \section{Perzeptron}
 initial sind die Gewichte auf 0 gesetzt. Als Trainingsdaten für die Gewichtsanpassung per Gradientenabstieg werden die Belegungen der Variablen aus der Angabe benutzt. Da alle Daten angegeben werden sollen und die Trainingsdatenmenge äußerst gering ist, bietet es sich an die Berechnungen per Hand durchzuführen. Die zufällige Auswahl der Trainingsdaten wird per Hand gemacht.
 
