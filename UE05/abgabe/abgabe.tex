@@ -159,6 +159,13 @@ Lässt man sich auf der Konsole die Deltawerte der Iterationen ausgeben so sieht
 
 Beide male ist der Vorletzte Schritt über \texttt{0.02} und der nächste bereits unter \texttt{0.002}. Deshalb sind auch die Policies entsprechend gleich.
 \lstset{numbers=left}
+
+\subsection{V.I. Optimisation}
+Es gibt eine Variation des Policy Iteration Algorithmus, welche die Policy für mehrere Schritte konstant hält und nur die Utility werte verändert.\footcite{
+Martin L. Puterman and Moon Chirl Shin. Modified policy iteration algorithms for discounted Markov decision processes. Management Science, 24:1127-1137, 1978.}
+(Zitiert nach\footcite{https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume4/kaelbling96a-html/node21.html})
+
+
 \section{Perzeptron}
 initial sind die Gewichte auf 0 gesetzt. Als Trainingsdaten für die Gewichtsanpassung per Gradientenabstieg werden die Belegungen der Variablen aus der Angabe benutzt. Da alle Daten angegeben werden sollen und die Trainingsdatenmenge äußerst gering ist, bietet es sich an die Berechnungen per Hand durchzuführen. Die zufällige Auswahl der Trainingsdaten wird per Hand gemacht.
 
