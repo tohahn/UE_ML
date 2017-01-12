@@ -163,7 +163,9 @@ Beide male ist der Vorletzte Schritt über \texttt{0.02} und der nächste bereit
 \subsection{V.I. Optimisation}
 Es gibt eine Variation des Policy Iteration Algorithmus, welche die Policy für mehrere Schritte konstant hält und nur die Utility werte verändert.\footcite{
 Martin L. Puterman and Moon Chirl Shin. Modified policy iteration algorithms for discounted Markov decision processes. Management Science, 24:1127-1137, 1978.}
-(Zitiert nach\footcite{https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume4/kaelbling96a-html/node21.html})
+(Zitiert nach\footcite{https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume4/kaelbling96a-html/node21.html}) Durch diese verbesserung wird die Policy gleichmäßiger der optimalen angenähert, jedoch wird das Optimum erst nach mehr Iterationen erreicht.\\
+
+Weiterhin kann bei der Policy iteration die Berechnung der Utility Werte als Gleichungssystem gesehen werden. Es gibt eine Gleichung für jeden State, da für alle States ein Utility-Wert berechnet werden muss und
 
 
 \section{Perzeptron}
