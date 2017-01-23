@@ -3,18 +3,17 @@ package code;
 import java.util.ArrayList;
 
 public class MagicMain {
-	public enum Items{
+	public enum Item{
 		Brot, Milch, Mehl
 	}
 	
-	public static void main(String[] args) {
-		Items[] i = { Items.Milch, Items.Brot, Items.Brot};
-		ArrayList<Items[]> transactions = new ArrayList<Items[]>();
+	public static void main(String[] args, Class Item) {
+		Item[] i = { Item.Milch, Item.Brot, Item.Brot};
+		ArrayList<Item[]> transactions = new ArrayList<Item[]>();
 		transactions.add(i);
-		//Apriori<Items> a = new Apriori<Items>(transactions);
-		for( Items item : i[0].values()){
-			System.out.println(item.name());
-		}
+		Apriori<Item> a = new Apriori<Item>(transactions);
+		Item.v
+		
 	}
 
 }

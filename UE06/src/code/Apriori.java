@@ -1,17 +1,24 @@
 package code;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
+import java.util.Map.Entry;
 
-public class Apriori<E extends Enum> {
-	// alle Transactions aufgeteilt in untermengen mit der jeweiligen Anzahl an Elementen.
+public class Apriori<E extends Enum<E>> {
+	// all transactions subdevided into lists by transaction size
 	private ArrayList<ArrayList<E[]>> orderedTransa;
 	
-	//# aller Transactions
+	//# of all Transactions
 	private float nrTransa;
 	
+	private E[] values;
+	
 	public Apriori(ArrayList<E[]> transactions){
+		// total number of transactions
 		nrTransa= transactions.size();
+		
+		// all possible values of the transaction
+		values = transactions.get(0)[0].getDeclaringClass().getEnumConstants();
+		
 		for(int i =0 ; i< transactions.size(); i++ ){
 				
 			E[] e = transactions.get(i);
@@ -25,13 +32,51 @@ public class Apriori<E extends Enum> {
 	}
 	
 	/**
-	 * 
+	 * Returns a Map of item-sets to their respective confidence
 	 */
-	public HashMap<E[],Float> getRules(){
-		do{
+	public HashMap<E[],Float> getRules(float min_confidence, float min_support){
+		HashMap<E[],Float> c1 = new HashMap<>();
+		for( E item: values){
+			E[] hypothese =(E[]) new Object[1];
 			
+			c1.put(hypothese , 0.0f);
 		}
-		while(true);
+		HashMap<E[],Float> l1 = new HashMap<>();
+		//Set<Entry<E,Float>> c1Set = c1.entrySet();
+		for(Entry<E[],Float> entry : c1.entrySet()){
+			float  support= support(entry.getKey());
+			if(support>=min_support){
+				l1.put(entry.getKey(), support);
+			}
+		}
+		HashMap<E[],Float> lALL = new HashMap<>();
+		if(l1.isEmpty()){
+			return lALL;
+		}
+		
+		//still work to do, start iterations
+		@SuppressWarnings("unchecked")
+		HashMap<E[],Float> ln = (HashMap<E[],Float>) l1.clone();
+		HashMap<E[],Float> cn = new HashMap<E[],Float>();
+		do{
+			cn = aprioriGen(ln);
+			ln = new HashMap<E[],Float>();
+			for(Entry<E[],Float> entry : cn.entrySet()){
+				float support = support(entry.getKey());
+				if(support>=min_support){
+					ln.put(entry.getKey(), support);
+				}
+			}
+			for(Entry<E[],Float> entry : ln.entrySet()){
+				lALL.put(entry.getKey(), entry.getValue());
+			}
+
+		}
+		while(false);
+
+		return null;
+	}
+	private HashMap<E[],Float> aprioriGen(HashMap<E[],Float> c){
 		return null;
 	}
 	private float confidence(E[] x, E[] y){
