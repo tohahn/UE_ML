@@ -44,7 +44,7 @@ public class Apriori<E extends Enum<E>> {
 		}
 
 		System.out.println("Transactions :");
-		for(int i =1; i< sizeOfLongestTransaction; i++){
+		for(int i =1; i<= sizeOfLongestTransaction; i++){
 			
 			if(orderedTransa.containsKey(i)){
 				
@@ -60,7 +60,7 @@ public class Apriori<E extends Enum<E>> {
 	/**
 	 * Returns a Map of item-sets to their respective confidence
 	 */
-	public HashMap<HashSet<E>,Float> getRules(float min_confidence, float min_support){
+	public HashMap<HashSet<E>,HashSet<E>> getRules(float min_confidence, float min_support){
 		HashSet<HashSet<E>> c1 = new HashSet<>();
 		for( E item: values){
 			HashSet<E> hypothesis = new HashSet<>();
@@ -77,7 +77,10 @@ public class Apriori<E extends Enum<E>> {
 		}
 		HashMap<HashSet<E>,Float> lALL = new HashMap<>();
 		if(l1.isEmpty()){
-			return lALL;
+			HashMap<HashSet<E>,HashSet<E>> returner = new HashMap<>();
+			for(HashSet<E> entry : lALL.keySet()){
+			 returner.put(entry, null);
+			}
 		}
 		
 		//still work to do, start iterations
@@ -88,6 +91,7 @@ public class Apriori<E extends Enum<E>> {
 		do{
 			
 			cn = aprioriGen(ln.keySet());
+			
 			setPrint("new apriori-gen:", cn,"");
 			ln = new HashMap<HashSet<E>,Float>();
 			for(HashSet<E> entry : cn){
@@ -103,70 +107,78 @@ public class Apriori<E extends Enum<E>> {
 
 		}
 		while(!ln.isEmpty());
-
-		return lALL;
+		//now generate association rules
+		HashMap<HashSet<E>,HashSet<E>> assRules = new HashMap<>();
+		//also needed are the Conclusions 
+		HashSet<HashSet<E>> hK = new HashSet<>();
+		for(Entry<HashSet<E>,Float> entry: lALL.entrySet()){
+			for(E item : entry.getKey()){
+				
+				HashSet<E> aImplies = new HashSet<>();
+				HashSet<E> b = new HashSet<>();
+				aImplies.addAll(entry.getKey());
+				aImplies.remove(item);
+				b.add(item);
+				if(confidence(aImplies,b)>min_confidence){
+					assRules.put(aImplies, b);
+					hK.add(b);
+				}
+			}
+		}
+		do{
+			HashSet<HashSet<E>> hKMinusOne = new HashSet<>();
+			hKMinusOne.addAll(hK);
+			hK= aprioriGen(hKMinusOne);
+			setPrint("new apriori-gen:", hK,"");
+			HashSet<HashSet<E>> toBeRemoved = new HashSet<>();
+			for(HashSet<E> conclusion : hK){
+				for(Entry<HashSet<E>,Float> entry: lALL.entrySet()){
+					HashSet<E> aImplies = new HashSet<>();
+					aImplies.addAll(entry.getKey());
+					aImplies.removeAll(conclusion);
+					
+					float conf = confidence(aImplies,conclusion);
+					
+					System.out.println("Confidence" + aImplies + "-->"+ conclusion);
+					System.out.println("is" + conf);
+					
+					if(conf>min_confidence){
+						assRules.put(aImplies, conclusion);
+					}
+					else{
+						toBeRemoved.add(conclusion);
+					}
+				}
+			}
+			for(HashSet<E> entry : toBeRemoved){
+				hK.remove(entry);
+			}
+			setPrint("Survivers: ", hK,"");
+		}
+		while(!hK.isEmpty());
+		return assRules;
 	}
 	private void setPrint(String pre, Set<HashSet<E>> s, String suff){
-		System.out.println(pre);
+		System.out.print(pre);
 		for(HashSet<E> transaction: s){
-			for(E item : transaction){
-				System.out.print(item.name()+ " ");
-			}
+			System.out.print(transaction);
 		}
 		System.out.println(suff);
 	}
 	private void setPrint(String pre, HashSet<E> s, String suff){
-		System.out.println(pre);
-			for(E item : s){
-				System.out.print(item.name()+ " ");
-			}
+		System.out.print(pre);
+		System.out.print(s);
 		System.out.println(suff);
 	}
-//	private HashSet<E[]> aprioriGen(HashSet<E[]> c){
-//		HashSet <HashSet<E>>candidates = new HashSet<>();
-//		//step one of apriori-gen:
-//		//join-step
-//		int currentHypothesisLength;
-//		{
-//			Object[] someHypothesis = c.toArray();
-//			currentHypothesisLength= someHypothesis.length;
-//		}
-//		for(E[] transaction1: c){
-//			for(E[] transaction2: c){
-//				HashSet joined = copyJoin(transaction1, transaction2);
-//				if(joined.size() == currentHypothesisLength + 2){
-//					candidates.add(joined);
-//				}
-//			}
-//		}
-//		//step two of apriori-gen:
-//		//prune-step
-//		for(HashSet<E> transaction: candidates){
-//			for(E item: transaction){
-//				transaction.remove(item);
-//				if(c.contains(transaction)){
-//					transaction.add(item);
-//				}
-//				else{
-//					candidates.remove(transaction.add(item));
-//				}
-//			}
-//		}
-//		//convert to HashSet<E[]>
-//		HashSet<E[]> returner = new HashSet<>();
-//		for(HashSet<E> transaction : candidates){
-//			returner.add((E[])transaction.toArray());
-//		}
-//		return returner;
-//	}
+
 	private HashSet<HashSet<E>> aprioriGen(Set<HashSet<E>> c){
 		HashSet <HashSet<E>>candidates = new HashSet<>();
 		//step one of apriori-gen:
 		//join-step
-		int currentHypothesisLength;
-		{
-			currentHypothesisLength= c.iterator().next().size();
+		if(c.isEmpty()){
+			return candidates;
 		}
+		int	currentHypothesisLength= c.iterator().next().size();
 		for(HashSet<E> transaction1: c){
 			for(HashSet<E> transaction2: c){
 				HashSet<E> joined = copyJoin(transaction1,transaction2);
@@ -176,7 +188,7 @@ public class Apriori<E extends Enum<E>> {
 				}
 			}
 		}
-		setPrint("after aprioriGen step join"  + " :" ,candidates,"");
+		setPrint("[ \t\t after aprioriGen step join"  + " :" ,candidates,"]");
 		
 		//step two of apriori-gen:
 		//prune-step
@@ -196,7 +208,7 @@ public class Apriori<E extends Enum<E>> {
 //		for(HashSet<E> transaction : candidates){
 //			returner.add((E[])transaction.toArray());
 //		}
-		setPrint("after aprioriGen step prune"  + " :" ,candidates,"");
+		setPrint("[ \t\tafter aprioriGen step prune"  + " :" ,candidates,"]");
 		return candidates;
 	}
 	private HashSet<E> copyJoin(E[] a, E[] b){
@@ -247,13 +259,13 @@ public class Apriori<E extends Enum<E>> {
 //		}
 //		return true;
 //	}
-//	private float confidence(E[] x, E[] y){
-//		@SuppressWarnings("unchecked")
-//		E[] xy = (E[])new Object[x.length+y.length];
-//		System.arraycopy(x, 0, xy, 0, x.length);
-//		System.arraycopy(y, 0, xy, x.length-1, y.length);
-//		return support(xy)/support(x);
-//	}
+	private float confidence(HashSet<E> x, HashSet<E> y){
+		
+		HashSet<E> xy = new HashSet<>();
+		xy.addAll(x);
+		xy.addAll(y);
+		return support(xy)/support(x);
+	}
 //	private float support(E[] e){
 //		int denominator = 0;
 //		for( int i = e.length; i<orderedTransa.size(); i++ ){
@@ -264,9 +276,9 @@ public class Apriori<E extends Enum<E>> {
 //		return denominator/nrTransa;
 //	}
 	
-	private float support(HashSet<E> e){
+	public float support(HashSet<E> e){
 		float denominator = 0;
-		for( int i = e.size(); i<sizeOfLongestTransaction; i++ ){
+		for( int i = e.size(); i<=sizeOfLongestTransaction; i++ ){
 			if(orderedTransa.containsKey(i)){
 				
 				for(Set<E> transa : orderedTransa.get(i)){
@@ -283,18 +295,7 @@ public class Apriori<E extends Enum<E>> {
 		}
 		return denominator/nrTransa;
 	}
-//	/**
-//	 * returns true if all a are containded in b
-//	 * @return
-//	 */
-//	private boolean containsAll(E[] a, E[] b){
-//		for(E element: a){
-//			if(!contains(b, element)){
-//				return false;
-//			}
-//		}
-//		return true;
-//	}
+
 	/**
 	 * by: http://stackoverflow.com/questions/1128723/how-can-i-test-if-an-array-contains-a-certain-value
 	 * @param array
