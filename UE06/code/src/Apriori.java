@@ -1,4 +1,4 @@
-package code;
+
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -100,7 +100,7 @@ public class Apriori<E extends Enum<E>> {
 					ln.put(entry, support);
 				}
 			}
-			setPrint("Survivers: ", ln.keySet(),"");
+			setPrint("survivors: ", ln.keySet(),"");
 			for(Entry<HashSet<E>,Float> entry : ln.entrySet()){
 				lALL.put(entry.getKey(), entry.getValue());
 			}
@@ -153,7 +153,7 @@ public class Apriori<E extends Enum<E>> {
 			for(HashSet<E> entry : toBeRemoved){
 				hK.remove(entry);
 			}
-			setPrint("Survivers: ", hK,"");
+			setPrint("survivors: ", hK,"");
 		}
 		while(!hK.isEmpty());
 		return assRules;
@@ -192,12 +192,13 @@ public class Apriori<E extends Enum<E>> {
 		
 		//step two of apriori-gen:
 		//prune-step
+		//TODO nothing gets pruned!
 		for(HashSet<E> transaction: candidates){
 			for(E item: transaction){
 				HashSet<E> current = new HashSet<>();
-				current = (HashSet<E>) transaction.clone();
+				current.addAll( transaction);
 				current.remove(item);
-				if(!c.contains(transaction)){
+				if(!c.containsAll(current)){
 					candidates.remove(current.add(item));
 				}
 				

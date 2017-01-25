@@ -1,0 +1,87 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[german]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{tikz}
+
+\lstset{
+	basicstyle=\footnotesize,
+	tabsize=3,
+	title=\lstname,
+	breaklines=true
+}
+
+\addtolength{\oddsidemargin}{-.875in}
+\addtolength{\evensidemargin}{-.875in}
+\addtolength{\textwidth}{1.75in}
+
+\addtolength{\topmargin}{-.875in}
+\addtolength{\textheight}{1.75in}
+
+\title{Machine Learning Übungsblatt 5}
+\author{Ramon Leiser\and Tobias Hahn}
+
+\begin{document}
+\maketitle
+\newpage
+\section*{Fragen}
+\subsection{PCA auf Iris Datensatz}
+Wir haben versucht Korrelation im Iris Datensatz auf zu decken um so eventuell die Dimensisionalität des Problems zu senken. Der Iris-Datensatz besteht aus Daten zu drei Schwertlilienarten, welche anhand der aufgeführten Merkmale fast unterscheidbar sind. Zu jeder art gibt es 50 Einträge also insgesamt 150 Datenzeilen. Die Merkmale lauten:
+\begin{enumerate}
+\item Kelchblütenblatt-Länge.
+\item Kelchblütenblatt-Breite.
+\item Blütenblatt-Länge.
+\item Blütenblatt-Breite.
+\end{enumerate}
+Die PCA in Weka zeigte die folgenden Eigenwerte mit zugehörigem Anteil an der gesamten Varianz an:
+\begin{lstlisting}
+eigenvalue	proportion	cumulative
+  2.91082	  0.7277 	  0.7277 	-0.581petL-0.566petW-0.522sepL+0.263sepW
+  0.92122	  0.23031	  0.95801	0.926sepW+0.372sepL+0.065petW+0.021petL
+  0.14735	  0.03684	  0.99485	-0.721sepL+0.634petW+0.242sepW+0.141petL
+\end{lstlisting}
+Der letzte Eigenwert (und somit auch der zugehörige Eigenvektor) tragen nur $ 3\% $ zur Varianz der Daten bei und könnte deshalb außen vor gelassen werden.  \\
+Besser mehr Information enthalten die Eigenvektoren sind die Eigenvektoren:
+\begin{lstlisting}
+Eigenvectors
+ V1	 	 V2	 	 V3	
+-0.5224	 0.3723	-0.721 	sepL
+ 0.2634	 0.9256	 0.242 	sepW
+-0.5813	 0.0211	 0.1409	petL
+-0.5656	 0.0654	 0.6338	petW
+\end{lstlisting}
+Der erste Eigenvektor wird relativ stark von allen Variablen beeinflusst. Man könnte ihn als die Pflanzengröße in Relation zur Kelchblüten-Breite betiteln, da die Kelchblüten-Breite in einem inversen Verhältnis zur Kelchblüten-Länge, sowie zu den anderen Variablen steht. \\
+Der zweite Eigenvektor wird vor allem von den maßen der Kelchblüte bestimmt. Hier stehen die beiden Werte jedoch in positiver Korrelation. Man könnte diesen Eigenvektor als die Kelchblütengröße Bezeichnen.\\
+Der dritte Eigenvektor beschreibt vor allem einen negativen Zusammenhang zwischen der Kelchblütenblatt-Breite und der Blütenblatt-Länge und ist dem ersten Eigenvektor ähnlich da er auch genau ein andersartiges Vorzeichen besitzt. Er trägt allerdings nur noch zu einem sehr kleinen Anteil der Varianz bei.\\
+Der Letzte Eigenvektor kann nun bei der Basistransformation weggelassen werden, was die Dimensionalität des Datensatzes von Vier auf Drei senkt.\\
+Trainiert man nun einen Naive-Bayes Klassifikator auf dem normalen und dem reduzierten Datensatz und vergleicht die Ergebnisse stellt man fest, wie zu erwarten nur leicht schlechter ist, als die Klassifikation auf dem ganzen Datensatz. Zum Test wurde ein Cross-validation Verfahren benutzt mit 10 Faltungen. Hier ein Auszug der Ergebnisse:
+\begin{itemize}
+\item Voller Datensatz
+\begin{lstlisting}
+=== Confusion Matrix ===
+
+  a  b  c   <-- classified as
+ 50  0  0 |  a = Iris-setosa
+  0 48  2 |  b = Iris-versicolor
+  0  4 46 |  c = Iris-virginica
+  
+Mean absolute error                      0.0342
+\end{lstlisting}
+\item Reduzierter Datensatz
+\begin{lstlisting}
+=== Confusion Matrix ===
+
+  a  b  c   <-- classified as
+ 50  0  0 |  a = Iris-setosa
+  0 44  6 |  b = Iris-versicolor
+  0  5 45 |  c = Iris-virginica
+  
+Mean absolute error                      0.0717
+\end{lstlisting}
+Der Mittlere Fehler steigt also von $3\%$ auf $7\%$. Reduziert man die Dimensionalität des Datensatzes noch um eine weitere Dimension so wächst der mittlere absolute Fehler überraschenderweise nur auf $8\%$ an. Daran erkennt man dass im Iris-Datensatz relativ wenig redundante Korrelation der Daten steckt.
+\end{itemize}
+\end{document}
+\end{document}
