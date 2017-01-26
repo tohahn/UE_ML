@@ -60,7 +60,7 @@ public class MagicMain {
 //		System.out.println("support test one :" + a.support(one));
 //		System.out.println("support test two :" + a.support(two));
 //		System.out.println("support test three :" + a.support(three));
-		for(Map.Entry<HashSet<Item>,HashSet<Item>> e: a.getRules(0.75f, 0.2f).entrySet()){
+		for(Map.Entry<HashSet<Item>,HashSet<HashSet<Item>>> e: a.getRules(0.75f, 0.2f).entrySet()){
 			for(Item i : e.getKey()){
 				System.out.print(i.name()+ "\t");
 			}

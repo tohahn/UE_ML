@@ -58,9 +58,13 @@ public class Apriori<E extends Enum<E>> {
 	
 	
 	/**
-	 * Returns a Map of item-sets to their respective confidence
+	 * Returns a Map of item-sets to that implie other item-sets
 	 */
-	public HashMap<HashSet<E>,HashSet<E>> getRules(float min_confidence, float min_support){
+	public HashMap<HashSet<E>,HashSet<HashSet<E>>> getRules(float min_confidence, float min_support){
+		System.out.println("-------------------------------------");
+		System.out.println("Apriori \t Part \t \t One");
+		System.out.println("Generate Large Item Sets");
+		System.out.println("-------------------------------------");
 		HashSet<HashSet<E>> c1 = new HashSet<>();
 		for( E item: values){
 			HashSet<E> hypothesis = new HashSet<>();
@@ -82,7 +86,7 @@ public class Apriori<E extends Enum<E>> {
 			 returner.put(entry, null);
 			}
 		}
-		
+		lALL.putAll(l1);
 		//still work to do, start iterations
 		@SuppressWarnings("unchecked")
 		HashMap<HashSet<E>,Float> ln = new HashMap<>();
@@ -107,9 +111,20 @@ public class Apriori<E extends Enum<E>> {
 
 		}
 		while(!ln.isEmpty());
+		for(Entry<HashSet<E>,Float> entry: lALL.entrySet()){
+			System.out.println("<Item Set:");
+			System.out.print(entry.getKey());
+			System.out.print(" has confidence");
+			System.out.println(entry.getValue());
+			System.out.println();
+		}
+		System.out.println("-------------------------------------");
+		System.out.println("Apriori \t Part \t\t Two");
+		System.out.println("Generate  Association Rules");
+		System.out.println("-------------------------------------");
 		//now generate association rules
-		HashMap<HashSet<E>,HashSet<E>> assRules = new HashMap<>();
-		//also needed are the Conclusions 
+		HashMap<HashSet<E>,HashSet<HashSet<E>>> assRules = new HashMap<>();
+		//also needed are the Conclusions (second part) of the assRules
 		HashSet<HashSet<E>> hK = new HashSet<>();
 		for(Entry<HashSet<E>,Float> entry: lALL.entrySet()){
 			for(E item : entry.getKey()){
@@ -119,12 +134,23 @@ public class Apriori<E extends Enum<E>> {
 				aImplies.addAll(entry.getKey());
 				aImplies.remove(item);
 				b.add(item);
-				if(confidence(aImplies,b)>min_confidence){
-					assRules.put(aImplies, b);
+				if(confidence(aImplies,b)>=min_confidence){
+					if(assRules.containsKey(aImplies)){
+						HashSet<HashSet<E>> oldImplications = assRules.get(aImplies);
+						oldImplications.add(b);
+						assRules.put(aImplies, oldImplications);
+					}
+					else{
+						HashSet<HashSet<E>> newImplicationList = new HashSet<>();
+						newImplicationList.add(b);
+						assRules.put(aImplies, newImplicationList);
+					}
 					hK.add(b);
 				}
 			}
 		}
+		setPrint("first hypotheses: ", assRules.keySet(), "");
+		//still work to do, iterate over larger rules
 		do{
 			HashSet<HashSet<E>> hKMinusOne = new HashSet<>();
 			hKMinusOne.addAll(hK);
@@ -139,11 +165,20 @@ public class Apriori<E extends Enum<E>> {
 					
 					float conf = confidence(aImplies,conclusion);
 					
-					System.out.println("Confidence" + aImplies + "-->"+ conclusion);
-					System.out.println("is" + conf);
 					
-					if(conf>min_confidence){
-						assRules.put(aImplies, conclusion);
+					
+					if(conf>=min_confidence){
+						if(assRules.containsKey(aImplies)){
+							HashSet<HashSet<E>> oldImplications = assRules.get(aImplies);
+							oldImplications.add(conclusion);
+							assRules.put(aImplies, oldImplications);
+						}
+						else{
+							HashSet<HashSet<E>> newImplicationList = new HashSet<>();
+							newImplicationList.add(conclusion);
+							assRules.put(aImplies, newImplicationList);
+						}
+						
 					}
 					else{
 						toBeRemoved.add(conclusion);
@@ -173,6 +208,7 @@ public class Apriori<E extends Enum<E>> {
 
 	private HashSet<HashSet<E>> aprioriGen(Set<HashSet<E>> c){
 		HashSet <HashSet<E>>candidates = new HashSet<>();
+		setPrint("[ \t\t  aprioriGen input"  + " :" ,c,"]");
 		//step one of apriori-gen:
 		//join-step
 		if(c.isEmpty()){
@@ -234,17 +270,17 @@ public class Apriori<E extends Enum<E>> {
 		return returner;
 		
 	}
-	private E[] copyWithout(E[] in, E without){
-		E[] returner= (E[]) new Object[in.length-1];
-		int j=0;
-		for( int i = 0; i< in.length; i++){
-			if(!in[i].equals(without)){
-				returner[j]= in[i];
-				j++;
-			}
-		}
-		return returner;
-	}
+//	private E[] copyWithout(E[] in, E without){
+//		E[] returner= (E[]) new Object[in.length-1];
+//		int j=0;
+//		for( int i = 0; i< in.length; i++){
+//			if(!in[i].equals(without)){
+//				returner[j]= in[i];
+//				j++;
+//			}
+//		}
+//		return returner;
+//	}
 	/**
 	 * Contains for an Array and a HashSet.
 	 * The Array can be shorter than the HashSet.
@@ -265,6 +301,8 @@ public class Apriori<E extends Enum<E>> {
 		HashSet<E> xy = new HashSet<>();
 		xy.addAll(x);
 		xy.addAll(y);
+		System.out.print("Confidence" + x + "-->"+ y);
+		System.out.println(" \t\t is " + support(xy)/support(x));
 		return support(xy)/support(x);
 	}
 //	private float support(E[] e){
@@ -291,9 +329,7 @@ public class Apriori<E extends Enum<E>> {
 				
 			}
 		}
-		if(denominator>0){
-			System.out.println(denominator/nrTransa);
-		}
+		
 		return denominator/nrTransa;
 	}
 
