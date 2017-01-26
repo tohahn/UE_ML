@@ -62,8 +62,8 @@ public class Apriori<E extends Enum<E>> {
 	 */
 	public HashMap<HashSet<E>,HashSet<HashSet<E>>> getRules(float min_confidence, float min_support){
 		System.out.println("-------------------------------------");
-		System.out.println("Apriori \t Part \t \t One");
-		System.out.println("Generate Large Item Sets");
+		System.out.println("|   Apriori \t Part \t \t One  \t|");
+		System.out.println("|   Generate Large Item Sets\t\t|");
 		System.out.println("-------------------------------------");
 		HashSet<HashSet<E>> c1 = new HashSet<>();
 		for( E item: values){
@@ -92,14 +92,18 @@ public class Apriori<E extends Enum<E>> {
 		HashMap<HashSet<E>,Float> ln = new HashMap<>();
 		ln.putAll(l1);
 		HashSet<HashSet<E>> cn = new HashSet<>();
+		int i=0;
 		do{
-			
+			System.out.println();
+			System.out.printf("---------------- k - Equals : %d ----------------", i++);
 			cn = aprioriGen(ln.keySet());
 			
 			setPrint("new apriori-gen:", cn,"");
 			ln = new HashMap<HashSet<E>,Float>();
 			for(HashSet<E> entry : cn){
 				float support = support(entry);
+				System.out.print("Support" + entry );
+				System.out.println(" \t\t is " + support);
 				if(support>=min_support){
 					ln.put(entry, support);
 				}
@@ -108,19 +112,25 @@ public class Apriori<E extends Enum<E>> {
 			for(Entry<HashSet<E>,Float> entry : ln.entrySet()){
 				lALL.put(entry.getKey(), entry.getValue());
 			}
+			if(ln.isEmpty()){
+				System.out.println("None! Iteration Over.!");
+			}
 
 		}
 		while(!ln.isEmpty());
+		System.out.println();
+		System.out.println("Large Itemsets:");
 		for(Entry<HashSet<E>,Float> entry: lALL.entrySet()){
-			System.out.println("<Item Set:");
+			System.out.print("<Item Set:");
 			System.out.print(entry.getKey());
-			System.out.print(" has confidence");
+			System.out.print(" has support");
 			System.out.println(entry.getValue());
-			System.out.println();
+			
 		}
+		System.out.println();
 		System.out.println("-------------------------------------");
-		System.out.println("Apriori \t Part \t\t Two");
-		System.out.println("Generate  Association Rules");
+		System.out.println("|  Apriori \t Part \t\t Two\t|");
+		System.out.println("|  Generate  Association Rules\t\t|");
 		System.out.println("-------------------------------------");
 		//now generate association rules
 		HashMap<HashSet<E>,HashSet<HashSet<E>>> assRules = new HashMap<>();
@@ -189,6 +199,10 @@ public class Apriori<E extends Enum<E>> {
 				hK.remove(entry);
 			}
 			setPrint("survivors: ", hK,"");
+			if(hK.isEmpty()){
+				System.out.println("None! You Done!");
+				System.out.println();
+			}
 		}
 		while(!hK.isEmpty());
 		return assRules;
@@ -208,6 +222,7 @@ public class Apriori<E extends Enum<E>> {
 
 	private HashSet<HashSet<E>> aprioriGen(Set<HashSet<E>> c){
 		HashSet <HashSet<E>>candidates = new HashSet<>();
+		System.out.println("");
 		setPrint("[ \t\t  aprioriGen input"  + " :" ,c,"]");
 		//step one of apriori-gen:
 		//join-step
@@ -240,25 +255,21 @@ public class Apriori<E extends Enum<E>> {
 				
 			}
 		}
-		//convert to HashSet<E[]>
-//		HashSet<E[]> returner = new HashSet<>();
-//		for(HashSet<E> transaction : candidates){
-//			returner.add((E[])transaction.toArray());
-//		}
 		setPrint("[ \t\tafter aprioriGen step prune"  + " :" ,candidates,"]");
+		System.out.println("");
 		return candidates;
 	}
-	private HashSet<E> copyJoin(E[] a, E[] b){
-		HashSet<E> returner = new HashSet<>();
-		for(E e : a ){
-			returner.add(e);
-		}
-		for(E e : b ){
-			returner.add(e);
-		}
-		return returner;
-		
-	}
+//	private HashSet<E> copyJoin(E[] a, E[] b){
+//		HashSet<E> returner = new HashSet<>();
+//		for(E e : a ){
+//			returner.add(e);
+//		}
+//		for(E e : b ){
+//			returner.add(e);
+//		}
+//		return returner;
+//		
+//	}
 	private HashSet<E> copyJoin(HashSet<E> a, HashSet<E> b){
 		HashSet<E> returner = new HashSet<>();
 		for(E e : a ){
@@ -322,14 +333,10 @@ public class Apriori<E extends Enum<E>> {
 				
 				for(Set<E> transa : orderedTransa.get(i)){
 					denominator += transa.containsAll(e)? 1.0f : 0;
-					if(transa.containsAll(e)){
-						//System.out.println("Wuhuu!!!!!!!!");
-					}
 				}
 				
 			}
 		}
-		
 		return denominator/nrTransa;
 	}
 
