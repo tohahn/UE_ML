@@ -88,7 +88,7 @@ public class Apriori<E extends Enum<E>> {
 		}
 		lALL.putAll(l1);
 		//still work to do, start iterations
-		@SuppressWarnings("unchecked")
+		
 		HashMap<HashSet<E>,Float> ln = new HashMap<>();
 		ln.putAll(l1);
 		HashSet<HashSet<E>> cn = new HashSet<>();
@@ -144,10 +144,10 @@ public class Apriori<E extends Enum<E>> {
 				HashSet<E> b = new HashSet<>();
 				aImplies.addAll(entry.getKey());
 				if(aImplies.isEmpty()){
-					break;
+					continue;
 				}
-				if(!aImplies.remove(item)||aImplies.isEmpty()){
-					break;
+				if(!aImplies.contains(item)||!aImplies.remove(item)||aImplies.isEmpty()){
+					continue;
 				}
 				b.add(item);
 				if(confidence(aImplies,b)>=min_confidence){
@@ -176,18 +176,18 @@ public class Apriori<E extends Enum<E>> {
 			HashSet<HashSet<E>> toBeRemoved = new HashSet<>();
 			for(HashSet<E> conclusion : hK){
 				for(Entry<HashSet<E>,Float> entry: lALL.entrySet()){
-
+					
 					HashSet<E> aImplies = new HashSet<>();
 					aImplies.addAll(entry.getKey());
 					if(aImplies.isEmpty()){
-						break;
+						continue;
 					}
-					if(!aImplies.removeAll(conclusion)||aImplies.isEmpty()){
-						break;
+					if(!aImplies.containsAll(conclusion)||!aImplies.removeAll(conclusion)||aImplies.isEmpty()){
+						continue;
 					}
-
+					
 					float conf = confidence(aImplies,conclusion);
-
+					System.out.println(conf);
 
 
 					if(conf>=min_confidence){
@@ -273,17 +273,7 @@ public class Apriori<E extends Enum<E>> {
 		System.out.println("");
 		return candidates;
 	}
-	//	private HashSet<E> copyJoin(E[] a, E[] b){
-	//		HashSet<E> returner = new HashSet<>();
-	//		for(E e : a ){
-	//			returner.add(e);
-	//		}
-	//		for(E e : b ){
-	//			returner.add(e);
-	//		}
-	//		return returner;
-	//		
-	//	}
+
 	private HashSet<E> copyJoin(HashSet<E> a, HashSet<E> b){
 		HashSet<E> returner = new HashSet<>();
 		for(E e : a ){
@@ -295,32 +285,7 @@ public class Apriori<E extends Enum<E>> {
 		return returner;
 
 	}
-	//	private E[] copyWithout(E[] in, E without){
-	//		E[] returner= (E[]) new Object[in.length-1];
-	//		int j=0;
-	//		for( int i = 0; i< in.length; i++){
-	//			if(!in[i].equals(without)){
-	//				returner[j]= in[i];
-	//				j++;
-	//			}
-	//		}
-	//		return returner;
-	//	}
-	/**
-	 * Contains for an Array and a HashSet.
-	 * The Array can be shorter than the HashSet.
-	 * @param a
-	 * @param eSet
-	 * @return
-	 */
-	//	private boolean contains(E[] a,HashSet<E[]> eSet ){
-	//		for(E[] b: eSet ){
-	//			if(!containsAll(a,b)){
-	//				return false;
-	//			}
-	//		}
-	//		return true;
-	//	}
+
 	private float confidence(HashSet<E> x, HashSet<E> y){
 
 		HashSet<E> xy = new HashSet<>();
@@ -330,15 +295,7 @@ public class Apriori<E extends Enum<E>> {
 		System.out.println(" \t\t is " + support(xy)/support(x));
 		return support(xy)/support(x);
 	}
-	//	private float support(E[] e){
-	//		int denominator = 0;
-	//		for( int i = e.length; i<orderedTransa.size(); i++ ){
-	//			for(E[] transa : orderedTransa.get(i)){
-	//				denominator += containsAll(e,transa)? 1 : 0;
-	//			}
-	//		}
-	//		return denominator/nrTransa;
-	//	}
+
 
 	public float support(HashSet<E> e){
 		float denominator = 0;
@@ -354,23 +311,5 @@ public class Apriori<E extends Enum<E>> {
 		return denominator/nrTransa;
 	}
 
-	/**
-	 * by: http://stackoverflow.com/questions/1128723/how-can-i-test-if-an-array-contains-a-certain-value
-	 * @param array
-	 * @param v
-	 * @return
-	 */
-	private static <T> boolean contains(final T[] array, final T v) {
-		if (v == null) {
-			for (final T e : array)
-				if (e == null)
-					return true;
-		} else {
-			for (final T e : array)
-				if (e == v || v.equals(e))
-					return true;
-		}
 
-		return false;
-	}
 }

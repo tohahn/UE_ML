@@ -53,24 +53,24 @@
  \section{Begriffsdefinitionen}
  
 \subsection{VC-Dimension eines Intervalls auf dem Zahlenstrahl}
-Intervalle auf dem reelen Zahlenstrahl sind definierbar durch zwei Punkte. dem Anfangs und dem Endpunkt. Somit muss ein Klassifikator in der Lage sein diese Menge und alle ihre Untermengen zu shattern. Die VC-Dimension beträgt also 2.
+Intervalle auf dem reellen Zahlenstrahl sind definierbar durch zwei Punkte, dem Anfangs und dem Endpunkt. Somit muss ein Klassifikator in der Lage sein diese Menge und alle ihre Untermengen zu zerschmettern. Die VC-Dimension beträgt also 2.
 
 \subsection{Realisierbarkeitsannahme}
-Googelt man "Realisierbarkeitannahme" bekommt man zwei ergebnisse:
+Googelt man "Realisierbarkeitannahme" bekommt man zwei Ergebnisse:
 \begin{itemize}
-\item Einen foliensatz zur Wirtschaftsinformatik, der nichts mit Pac-lernen zu tun hat.
+\item Einen Foliensatz zur Wirtschaftsinformatik, der nichts mit Pac-lernen zu tun hat.
 \item Die Angabe zu dieser Übung auf \texttt{www.tzi.de}
 \end{itemize}
-Auch weitere Suchen, sowie eine wiederholung der Folien zur Pac-lernbarkeit lieferten keine weitere Antworten.\\
+Auch unsere weitere Suche z.B. im four-germans-paper, sowie eine Wiederholung der Folien zur Pac-Lernbarkeit lieferten keine weitere Antworten.\\
 
 
 \subsection{Vervollständigen sie den Satz ...}
-\textit{Eine Hypothesenklasse $\mathcal{H}$  ist PAC-lernbar, falls es ein Lernverfahren $L$ und eine Funktion $m_H$ abhängig von $\epsilon$ und $\delta$ gibt, so dass für alle Verteilungen $D$ über $\mathcal{X}$ und jede Klassifizierungsfunktion $f : \mathcal{X} \rightarrow \{0, 1\}$ unter der Realisierbarkeitsannahme und $ m \geq m_H(\epsilon, \delta) $ unter $D$ identisch und unabhängig verteilten und mit $f$ beschrifteten Beispielen gilt, }\\\\
+\textit{Eine Hypothesenklasse $\mathcal{H}$  ist PAC-lernbar, falls es ein Lernverfahren $L$ und eine Funktion $m_H$ abhängig von $\epsilon$ und $\delta$ gibt, so dass für alle Verteilungen $D$ über $\mathcal{X}$ und jede Klassifizierungsfunktion $f : \mathcal{X} \rightarrow \{0, 1\}$ unter der Realisierbarkeitsannahme und $ m \geq m_H(\epsilon, \delta) $ unter $D$ identisch und unabhängig verteilten und mit $f$ beschrifteten Beispielen gilt, }\\
 dass die VC-Dimension von D endlich ist.
 
 
 \subsection{Fundamentalsatz der Lerntheorie}
-Der Fundermentalsatz der Lerntheorie beschreibt den Zusammenhang zwischen PAC-Lernbarkeit und der VC-Dimension. Nach Paul Fischer genügt es einen Kosistenten Hypothesen-Finder zu haben, welcher Stichproben aus $C$ auf $\mathcal{H}$ abbildet, so dass die Hypothesen konsistent sind mit beiden Konzepten und zu zeigen, dass die VC-Dimension von $\mathcal{H}$ endlich ist um zu wissen dass nach dem PAC-Modell $\textnormal{VcDim}(\mathcal{H})/\epsilon$ Stichproben genügen um die PAC-Bedingung zu erfüllen. \footnote{Paul Fischer \textit{Algorithmisches Lernen} 1999 unter: https://books.google.de/books?id=34HzBQAAQBAJ\&pg=PA37\&lpg=PA37
+Der Fundermentalsatz der Lerntheorie beschreibt den Zusammenhang zwischen PAC-Lernbarkeit und der VC-Dimension. Nach Paul Fischer genügt es einen Konsistenten Hypothesen-Finder zu haben, welcher Stichproben aus $C$ auf $\mathcal{H}$ abbildet, so dass die Hypothesen konsistent sind mit beiden Konzepten und zu zeigen, dass die VC-Dimension von $\mathcal{H}$ endlich ist um zu wissen dass nach dem PAC-Modell $\textnormal{VcDim}(\mathcal{H})/\epsilon$ Stichproben genügen um die PAC-Bedingung zu erfüllen. \footnote{Paul Fischer \textit{Algorithmisches Lernen} 1999 unter: https://books.google.de/books?id=34HzBQAAQBAJ\&pg=PA37\&lpg=PA37
 }
 
 \subsection{No-Free Lunch}
@@ -110,8 +110,8 @@ Eigenvectors
 Der erste Eigenvektor wird relativ stark von allen Variablen beeinflusst. Man könnte ihn als die Pflanzengröße in Relation zur Kelchblüten-Breite betiteln, da die Kelchblüten-Breite in einem inversen Verhältnis zur Kelchblüten-Länge, sowie zu den anderen Variablen steht. \\
 Der zweite Eigenvektor wird vor allem von den maßen der Kelchblüte bestimmt. Hier stehen die beiden Werte jedoch in positiver Korrelation. Man könnte diesen Eigenvektor als die Kelchblütengröße Bezeichnen.\\
 Der dritte Eigenvektor beschreibt vor allem einen negativen Zusammenhang zwischen der Kelchblütenblatt-Breite und der Blütenblatt-Länge und ist dem ersten Eigenvektor ähnlich da er auch genau ein andersartiges Vorzeichen besitzt. Er trägt allerdings nur noch zu einem sehr kleinen Anteil der Varianz bei.\\
-Der Letzte Eigenvektor kann nun bei der Basistransformation weggelassen werden, was die Dimensionalität des Datensatzes von Vier auf Drei senkt.\\
-Trainiert man nun einen Naive-Bayes Klassifikator auf dem normalen und dem reduzierten Datensatz und vergleicht die Ergebnisse stellt man fest, wie zu erwarten nur leicht schlechter ist, als die Klassifikation auf dem ganzen Datensatz. Zum Test wurde ein Cross-validation Verfahren benutzt mit 10 Faltungen. Hier ein Auszug der Ergebnisse:
+Der Letzte Eigenvektor kann nun bei der Basistransformation weggelassen werden, was die Dimensionalität des Datensatzes von vier auf drei Dimensionen senkt.\\
+Trainiert man nun einen Naive-Bayes Klassifikator auf dem normalen und dem reduzierten Datensatz und vergleicht die Ergebnisse stellt man fest, dass der Reduzierte Datensatz wie zu erwarten nur leicht schlechter ist als die Klassifikation auf dem ganzen Datensatz. Zum Test wurde ein Cross-validation Verfahren benutzt mit 10 Faltungen. Hier ein Auszug der Ergebnisse:
 \begin{itemize}
 \item Voller Datensatz
 \begin{lstlisting}
@@ -135,7 +135,175 @@ Mean absolute error                      0.0342
   
 Mean absolute error                      0.0717
 \end{lstlisting}
-Der Mittlere Fehler steigt also von $3\%$ auf $7\%$. Reduziert man die Dimensionalität des Datensatzes noch um eine weitere Dimension so wächst der mittlere absolute Fehler überraschenderweise nur auf $8\%$ an. Daran erkennt man dass im Iris-Datensatz relativ wenig redundante Korrelation der Daten steckt.
 \end{itemize}
+Der Mittlere absolute Fehler steigt also von $3\%$ auf $7\%$. Daran erkennt man dass im Iris-Datensatz kaum redundante Korrelation der Daten steckt.
+\section{Apriori Algorithmus}
+\subsection{Entdeckung von Assoziazionsregeln}
+Wir sind fälschlicherweise davon ausgegangen, dass der Algorithmus implementiert werden soll. Die folgende Berechnung ist der Output einer selbst geschriebenen Implementation des Algorithmus,welche mit abgegeben wird. Da das Hauptaugenmerk dieser Aufgabe nicht die Implementation ist wurde der Quellcode nur minimal dokumentiert. Die Ausgabe wurde aber mit einem Resultat einer Implementierung im Weka-Toolkit verglichen und ist korrekt.
+\begin{lstlisting}
+Transactions :
+Transaction size: 1[Wasser]
+Transaction size: 2[Brot, Bier]
+Transaction size: 2[Cola, Bier]
+Transaction size: 2[Wasser, Saft]
+Transaction size: 3[Schokolade, Chips, Cola]
+Transaction size: 3[Saft, Cola, Wein]
+Transaction size: 3[Saft, Cola, Bier]
+Transaction size: 3[Schokolade, Schinken, Brot]
+Transaction size: 4[Saft, Cola, Bier, Wein]
+
+
+\end{lstlisting}
+Der erste Teil des Algorithmus besteht darin große, mehrmals vorkommende Itemsets in der Eingabe zu finden.
+\begin{lstlisting}
+-------------------------------------
+|   Apriori 	 Part 	 	 One  	|
+|   Generate Large Item Sets		|
+-------------------------------------
+
+---------------- k - Equals : 0 ----------------
+[ 		  aprioriGen input :[Schokolade][Wasser][Saft][Brot][Bier][Cola][Wein]]
+[ 		 after aprioriGen step join :[Bier, Cola][Wasser, Saft][Schokolade, Cola][Schokolade, Bier][Wasser, Brot][Schokolade, Wein][Schokolade, Brot][Wasser, Bier][Cola, Wein][Schokolade, Wasser][Brot, Wein][Brot, Cola][Saft, Cola][Schokolade, Saft][Saft, Brot][Saft, Bier][Wasser, Wein][Brot, Bier][Wasser, Cola][Saft, Wein][Bier, Wein]]
+[ 		after aprioriGen step prune :[Bier, Cola][Wasser, Saft][Schokolade, Cola][Schokolade, Bier][Wasser, Brot][Schokolade, Wein][Schokolade, Brot][Wasser, Bier][Cola, Wein][Schokolade, Wasser][Brot, Wein][Brot, Cola][Saft, Cola][Schokolade, Saft][Saft, Brot][Saft, Bier][Wasser, Wein][Brot, Bier][Wasser, Cola][Saft, Wein][Bier, Wein]]
+
+
+
+\end{lstlisting}
+Hier wurden die neuen Hypothesen durch die Apriori-Gen Methode erzeugt. Es handelt sich im ersten Schritt um zweielementige Mengen. 
+\begin{lstlisting}
+new apriori-gen:[Bier, Cola][Wasser, Saft][Schokolade, Cola][Schokolade, Bier][Wasser, Brot][Schokolade, Wein][Schokolade, Brot][Wasser, Bier][Cola, Wein][Schokolade, Wasser][Brot, Wein][Brot, Cola][Saft, Cola][Schokolade, Saft][Saft, Brot][Saft, Bier][Wasser, Wein][Brot, Bier][Wasser, Cola][Saft, Wein][Bier, Wein]
+Support[Bier, Cola] 		 is 0.33333334
+Support[Wasser, Saft] 		 is 0.11111111
+Support[Schokolade, Cola] 		 is 0.11111111
+Support[Schokolade, Bier] 		 is 0.0
+Support[Wasser, Brot] 		 is 0.0
+Support[Schokolade, Wein] 		 is 0.0
+Support[Schokolade, Brot] 		 is 0.11111111
+Support[Wasser, Bier] 		 is 0.0
+Support[Cola, Wein] 		 is 0.22222222
+Support[Schokolade, Wasser] 		 is 0.0
+Support[Brot, Wein] 		 is 0.0
+Support[Brot, Cola] 		 is 0.0
+Support[Saft, Cola] 		 is 0.33333334
+Support[Schokolade, Saft] 		 is 0.0
+Support[Saft, Brot] 		 is 0.0
+Support[Saft, Bier] 		 is 0.22222222
+Support[Wasser, Wein] 		 is 0.0
+Support[Brot, Bier] 		 is 0.11111111
+Support[Wasser, Cola] 		 is 0.0
+Support[Saft, Wein] 		 is 0.22222222
+Support[Bier, Wein] 		 is 0.11111111
+survivors: [Bier, Cola][Saft, Cola][Saft, Bier][Saft, Wein][Cola, Wein]
+
+
+
+\end{lstlisting}
+Alle Mengen, die nicht dem minimalen Support entsprechen wurden entfernt. Basierend auf den noch vorhandenen Mengen werden nun dreielementige Mengen mit Apriori-Gen erzeugt.
+\begin{lstlisting}
+---------------- k - Equals : 1 ----------------
+[ 		  aprioriGen input :[Bier, Cola][Saft, Cola][Saft, Bier][Saft, Wein][Cola, Wein]]
+[ 		 after aprioriGen step join :[Saft, Bier, Wein][Saft, Bier, Cola][Bier, Cola, Wein][Saft, Cola, Wein]]
+[ 		after aprioriGen step prune :[Saft, Bier, Wein][Saft, Bier, Cola][Bier, Cola, Wein][Saft, Cola, Wein]]
+
+new apriori-gen:[Saft, Bier, Wein][Saft, Bier, Cola][Bier, Cola, Wein][Saft, Cola, Wein]
+Support[Saft, Bier, Wein] 		 is 0.11111111
+Support[Saft, Bier, Cola] 		 is 0.22222222
+Support[Bier, Cola, Wein] 		 is 0.11111111
+Support[Saft, Cola, Wein] 		 is 0.22222222
+survivors: [Saft, Bier, Cola][Saft, Cola, Wein]
+
+---------------- k - Equals : 2 ----------------
+[ 		  aprioriGen input :[Saft, Bier, Cola][Saft, Cola, Wein]]
+[ 		 after aprioriGen step join :[Saft, Bier, Cola, Wein]]
+[ 		after aprioriGen step prune :[Saft, Bier, Cola, Wein]]
+
+new apriori-gen:[Saft, Bier, Cola, Wein]
+Support[Saft, Bier, Cola, Wein] 		 is 0.11111111
+survivors: 
+None! Iteration Over.!
+
+
+
+\end{lstlisting}
+Es sind nun keine Mengen mehr vorhanden, die noch den minimalen Support erfüllen. Größere Mengen hätten einen noch kleineren Support und werden deshalb nicht verfolgt.
+\begin{lstlisting}
+Large Itemsets:
+<Item Set:[Bier, Cola] has support0.33333334
+<Item Set:[Wasser] has support0.22222222
+<Item Set:[Saft, Bier, Cola] has support0.22222222
+<Item Set:[Saft] has support0.44444445
+<Item Set:[Cola] has support0.5555556
+<Item Set:[Saft, Cola, Wein] has support0.22222222
+<Item Set:[Cola, Wein] has support0.22222222
+<Item Set:[Schokolade] has support0.22222222
+<Item Set:[Saft, Cola] has support0.33333334
+<Item Set:[Brot] has support0.22222222
+<Item Set:[Saft, Bier] has support0.22222222
+<Item Set:[Bier] has support0.44444445
+<Item Set:[Wein] has support0.22222222
+<Item Set:[Saft, Wein] has support0.22222222
+
+
+\end{lstlisting}
+Im zweiten Teil des Algorithmus werden nun Regeln erzeugt. Zunächst wird den großen Itemsets jeweils ein Element entnommen, auf das von den restlichen Einträgen aus geschlossen werden soll. 
+\begin{lstlisting}
+
+-------------------------------------
+|  Apriori 	 Part 		 Two	|
+|  Generate  Association Rules		|
+-------------------------------------
+Confidence[Cola]-->[Bier] 		 is 0.59999996
+Confidence[Bier]-->[Cola] 		 is 0.75
+Confidence[Bier, Cola]-->[Saft] 		 is 0.6666666
+Confidence[Saft, Cola]-->[Bier] 		 is 0.6666666
+Confidence[Saft, Bier]-->[Cola] 		 is 1.0
+Confidence[Cola, Wein]-->[Saft] 		 is 1.0
+Confidence[Saft, Wein]-->[Cola] 		 is 1.0
+Confidence[Saft, Cola]-->[Wein] 		 is 0.6666666
+Confidence[Wein]-->[Cola] 		 is 1.0
+Confidence[Cola]-->[Wein] 		 is 0.39999998
+Confidence[Cola]-->[Saft] 		 is 0.59999996
+Confidence[Saft]-->[Cola] 		 is 0.75
+Confidence[Bier]-->[Saft] 		 is 0.5
+Confidence[Saft]-->[Bier] 		 is 0.5
+Confidence[Wein]-->[Saft] 		 is 1.0
+Confidence[Saft]-->[Wein] 		 is 0.5
+
+
+\end{lstlisting}
+Alle Hypothesen unter der minimalen Confidence werden entfernt. Es bleiben lediglich Hypothesen die von den folgenden Mengen ausgehen. Da all diese Hypothesen auf \texttt{Cola} oder \texttt{Saft} Schließen werden diese beiden Element für den Apriori-Gen verwendet.
+\begin{lstlisting}
+first hypotheses: [Saft][Saft, Bier][Bier][Wein][Saft, Wein][Cola, Wein]
+
+[ 		  aprioriGen input :[Saft][Cola]]
+[ 		 after aprioriGen step join :[Saft, Cola]]
+[ 		after aprioriGen step prune :[Saft, Cola]]
+
+new apriori-gen:[Saft, Cola]
+Confidence[Bier]-->[Saft, Cola] 		 is 0.5
+0.5
+Confidence[Wein]-->[Saft, Cola] 		 is 1.0
+1.0
+survivors: 
+None! You Done!
+
+
+
+\end{lstlisting}
+Damit ist der Algorithmus beendet und es folgen die Ergebnisse. 
+\begin{lstlisting}
+
+Saft	--->	[[Cola]]
+Saft	Bier	--->	[[Cola]]
+Bier	--->	[[Cola]]
+Wein	--->	[[Saft], [Saft, Cola], [Cola]]
+Saft	Wein	--->	[[Cola]]
+Cola	Wein	--->	[[Saft]]
+
+\end{lstlisting}
+\subsection{Verbesserung des grundlegenden Algorithmus}
+Eine Variante vom Apriori-Algorithmus ist der Max-Miner. Er Arbeitet ähnlich wie der Apriori, generiert jedoch nicht alle häufigen Teilmengen aus den Transaktionen sondern direkt die maximal großen. Er arbeite auf einer Baumstruktur. \\
+Außerdem fanden wir den M-Apriori Algorithmus, welcher beim generieren der Itemsets speichert welches der Items im Set den kleinsten Support hatte. Außerdem Besteht zu jedem Item eine Referenz in welchen der Transaktionen es auftaucht. Nun kann zum bestimmen des Supports darauf zurückgegriffen werden und nur diese Transaktionen nach dem Itemset durchsucht werden.\\
+Durch ihre Verbesserungen sind die beiden Algorithmen schneller als der normale Apriori-Algorithmus ohne sein Ergebniss zu verändern, nur durch das einsparen von unnötigen Lookups und Erzeugung von Sets die dem minimalen Support nicht standhalten.
 \end{document}
 
