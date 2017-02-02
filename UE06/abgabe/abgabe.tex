@@ -44,7 +44,7 @@
 \addtolength{\topmargin}{-.875in}
 \addtolength{\textheight}{1.75in}
 
-\title{Machine Learning Übungsblatt 4}
+\title{Machine Learning Übungsblatt 6}
 \author{Ramon Leiser\and Tobias Hahn}
 
 \begin{document}
@@ -56,13 +56,7 @@
 Intervalle auf dem reellen Zahlenstrahl sind definierbar durch zwei Punkte, dem Anfangs und dem Endpunkt. Somit muss ein Klassifikator in der Lage sein diese Menge und alle ihre Untermengen zu zerschmettern. Die VC-Dimension beträgt also 2.
 
 \subsection{Realisierbarkeitsannahme}
-Googelt man "Realisierbarkeitannahme" bekommt man zwei Ergebnisse:
-\begin{itemize}
-\item Einen Foliensatz zur Wirtschaftsinformatik, der nichts mit Pac-lernen zu tun hat.
-\item Die Angabe zu dieser Übung auf \texttt{www.tzi.de}
-\end{itemize}
-Auch unsere weitere Suche z.B. im four-germans-paper, sowie eine Wiederholung der Folien zur Pac-Lernbarkeit lieferten keine weitere Antworten.\\
-
+Die Realisierbarkeitsannahme ist eine Annahme über die Verteilung  $D$ und einem dazugehörigen Sample $S$. Man geht i.d.R. davon aus, dass die Samples mit $D$ über den Zustandsraum $\mathcal{X}$ verteilt sind und ihr Lables $f$ einem Konzept $c*$ folgen so dass $f=c*(x)$. Die annahme würde nicht zutreffen wenn die Lables selbst zufällig und nicht von $\mathcal{X}$ abhängig sind, so dass $ S= \{ ( x_n,y_n ) \}$ aus der Verteilung D über $\mathcal{X} \times \mathcal{Y} $ Stammt.
 
 \subsection{Vervollständigen sie den Satz ...}
 \textit{Eine Hypothesenklasse $\mathcal{H}$  ist PAC-lernbar, falls es ein Lernverfahren $L$ und eine Funktion $m_H$ abhängig von $\epsilon$ und $\delta$ gibt, so dass für alle Verteilungen $D$ über $\mathcal{X}$ und jede Klassifizierungsfunktion $f : \mathcal{X} \rightarrow \{0, 1\}$ unter der Realisierbarkeitsannahme und $ m \geq m_H(\epsilon, \delta) $ unter $D$ identisch und unabhängig verteilten und mit $f$ beschrifteten Beispielen gilt, }\\
@@ -74,13 +68,14 @@ Der Fundermentalsatz der Lerntheorie beschreibt den Zusammenhang zwischen PAC-Le
 }
 
 \subsection{No-Free Lunch}
-No-Free Lunch geht ursprünglich auf den Autor \textbf{ Robert A. Heinlein} und den Science Fiction Roman \textit{The Moon Is a Harsh Mistress } zurück und Entwickelte sich zu einer Bezeichnung in der Mathematik und Informatik für einen gewissen Zusammenhang bei Optimierungsproblemen und somit auch im Machine-Learning. \\
-Das \textbf{No-free-Lunch-Theorem} besagt dass beim abstrahieren von Datensätzen kein einzelner Lösungsansatz auf der menge aller möglichen Probleme besser abschneidet als ein anderer. Jeder Lösungsansatz wäre bei einem Test auf alle möglichen Probleme nur genau so gut der Lösungsansatz alle Ergebnisse zu Raten.\\
-Da die meisten Probleme in der Realität z.B. den Naturgesetzen genügen müssen sich Lösungsansätze nie auf allen möglichen Problemen beweisen.
+No-Free Lunch geht ursprünglich auf den Autor \textbf{ Robert A. Heinlein} und den Science Fiction Roman \textit{The Moon Is a Harsh Mistress } zurück und entwickelte sich zu einer Bezeichnung in der Mathematik und Informatik für einen gewissen Zusammenhang bei Optimierungsproblemen und somit auch im Machine-Learning. \\
+Das \textbf{No-free-Lunch-Theorem} besagt dass beim Abstrahieren von Datensätzen kein einzelner Lösungsansatz auf der Menge aller möglichen Probleme besser abschneidet als ein anderer. Jeder Lösungsansatz wäre bei einem Test auf allen möglichen Problemen nur genau so gut wie der Lösungsansatz alle Ergebnisse zu Raten.\\
+Da die meisten Probleme in der Realität z.B. den Naturgesetzen genügen müssen sich Lösungsansätze jedoch nie auf allen möglichen Problemen beweisen.
 
 \subsection{Sokoban}
 Bei Sokoban verschiebt man Kästen in einem rasterisierten  Labyrinth. Man kann Kästen nur vor der Spielfigur her schieben und kann nur eine Kiste gleichzeitig bewegen. Es gibt eine Anzahl von vorgegebenen Zielfeldern auf die Jeweils ein beliebiger Kasten gestellt werden muss um ein Level ab zu schließen. Die Anzahl der gebrauchten Züge ergeben die Punktzahl für das Level (desto kleiner desto besser). \\
-Dadurch dass man die Kästen nur schieben und nicht ziehen kann, ergeben sich schnell Zustände aus denen man die Kästen nicht mehr heraus bekommt, z.B. wen ein Kasten in einer Ecke im Labyrinth steht.
+Dadurch dass man die Kästen nur schieben und nicht ziehen kann, ergeben sich schnell Zustände aus denen man die Kästen nicht mehr heraus bekommt, z.B. wen ein Kasten in einer Ecke im Labyrinth steht. Diese Gebilde kann man direkt mit den Wänden des Labyrinths gleich setzten, da man dadurch den Suchgraph zum lösen des Spiels einschränken würde und die Blöcke ohnehin nicht mehr bewegbar sind. Wenn es in dem Spiel dadurch jedoch weniger bewegbare Blöcke als Zielfelder gibt ist das Level sofort nicht mehr lösbar und der Suchpfad muss auch nicht weiter propagiert werden.\\
+Um diese Teilstellungen sofort zu erkennen müsste man am Anfang des Spiels global und nach jedem Zug, der eine Kiste bewegt lokal die unmittelbare Umgebung des Spielers auf solche Zwickmühlen überprüfen. 
 
 \subsection{PCA auf Iris Datensatz}
 Wir haben versucht Korrelation im Iris Datensatz auf zu decken um so eventuell die Dimensisionalität des Problems zu senken. Der Iris-Datensatz besteht aus Daten zu drei Schwertlilienarten, welche anhand der aufgeführten Merkmale fast unterscheidbar sind. Zu jeder art gibt es 50 Einträge also insgesamt 150 Datenzeilen. Die Merkmale lauten:
@@ -306,4 +301,3 @@ Eine Variante vom Apriori-Algorithmus ist der Max-Miner. Er Arbeitet ähnlich wi
 Außerdem fanden wir den M-Apriori Algorithmus, welcher beim generieren der Itemsets speichert welches der Items im Set den kleinsten Support hatte. Außerdem Besteht zu jedem Item eine Referenz in welchen der Transaktionen es auftaucht. Nun kann zum bestimmen des Supports darauf zurückgegriffen werden und nur diese Transaktionen nach dem Itemset durchsucht werden.\\
 Durch ihre Verbesserungen sind die beiden Algorithmen schneller als der normale Apriori-Algorithmus ohne sein Ergebniss zu verändern, nur durch das einsparen von unnötigen Lookups und Erzeugung von Sets die dem minimalen Support nicht standhalten.
 \end{document}
-
