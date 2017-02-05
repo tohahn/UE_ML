@@ -9,3 +9,8 @@
 \BOOKMARK [1][-]{section.2}{Apriori Algorithmus}{}% 9
 \BOOKMARK [2][-]{subsection.2.1}{Entdeckung von Assoziazionsregeln}{section.2}% 10
 \BOOKMARK [2][-]{subsection.2.2}{Verbesserung des grundlegenden Algorithmus}{section.2}% 11
+\BOOKMARK [1][-]{section.3}{GVGAI Controller}{}% 12
+\BOOKMARK [2][-]{subsection.3.1}{General idea}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.2}{Werte}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.3}{Formeln}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.4}{Code}{section.3}% 16

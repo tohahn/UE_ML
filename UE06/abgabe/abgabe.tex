@@ -300,4 +300,102 @@ Cola	Wein	--->	[[Saft]]
 Eine Variante vom Apriori-Algorithmus ist der Max-Miner. Er Arbeitet ähnlich wie der Apriori, generiert jedoch nicht alle häufigen Teilmengen aus den Transaktionen sondern direkt die maximal großen. Er arbeite auf einer Baumstruktur. \\
 Außerdem fanden wir den M-Apriori Algorithmus, welcher beim generieren der Itemsets speichert welches der Items im Set den kleinsten Support hatte. Außerdem Besteht zu jedem Item eine Referenz in welchen der Transaktionen es auftaucht. Nun kann zum bestimmen des Supports darauf zurückgegriffen werden und nur diese Transaktionen nach dem Itemset durchsucht werden.\\
 Durch ihre Verbesserungen sind die beiden Algorithmen schneller als der normale Apriori-Algorithmus ohne sein Ergebniss zu verändern, nur durch das einsparen von unnötigen Lookups und Erzeugung von Sets die dem minimalen Support nicht standhalten.
+
+\section{GVGAI Controller}
+\subsection{General idea}
+Die generelle Idee ist es, den OLMCTS Controller zu verwenden, und einige Modifikationen im Heurismus anzubringen. Der bisherige Heurismus ist ein ganz simpler Algorithmus, der nur den Game Score in Betracht zieht und ob gewonnen oder verloren wurde. Dieser Heurismus wurde um drei Modifikationen erweitert:
+\begin{enumerate}
+	\item Strafe für Opposite Actions
+	\paragraph{}
+	Um den Controller beizubringen, nicht dauernd Aktionen zu machen die im Endeffekt keinen Effekt haben, wurde eine Strafe für Opposite Actions eingeführt. Hierbei bekommt ein Zug eine Strafe, wenn er die Effekte vom letzten Zug rückgängig macht - beispielsweise nach hinten geht, wenn vorher nach vorne gegangen wurde. Diese Züge bekommen nur eine Strafe und werden nicht komplett entfernt, weil sie unter Umständen Sinn machen können - wenn man sich bspw. nicht bewegen will.
+	\item Strafe für blocking Movements
+	\paragraph{}
+	Auch hier eine Strafe, jedoch für Züge die blocking sind, d.h. beispielsweise in eine Mauer hineinbewegen. Dies kann auch unter Umständen Sinn machen, ist meistens jedoch sinnlos und wird daher bestraft.
+	\item Pheromonsystem
+	\paragraph{}
+	Um dem Controller beizubringen das Level zu erkunden, und nicht nur auf einer Stelle zu bleiben, wurde ein Pheromonsystem eingebracht. Bei diesem stößt der Avatar Pheromone aus, an der Stelle an der er sich befindet. Diese Pheromone diffundieren und verblassen über Zeit, und werden vom Score abgezogen, was heißt dass der Player eher angehalten ist global zu exploren statt an einer Stelle zu bleiben. 
+\end{enumerate}
+
+\subsection{Werte}
+Die Werte für die jeweiligen Strafen bzw. Berechnungen wurden dem Paper Open Loop Search for General Video Game Playing entnommen. Folgende Werte sind dabei von Bedeutung:
+Strafe für Opposite Actions: 0.1
+Strafe für Blocking Movements: 100
+Parameter für Pheromondiffundierung: 0.4
+Parameter für Pheromonverblassung: 0.99
+
+\subsection{Formeln}
+Im Grunde wurden zwei Formeln implementiert: Die Heuristik-Regel sowie die Pheromonberechnung auf welcher diese aufbaut.
+Die Formeln sind:
+Value = Game Score + WIN if WIN - LOSE if LOSE - Strafe für Opposite Action if Opposite Action - Strafe für Blocking Movements if Blocking Movement - Pheromon an der Stelle
+\paragraph{}
+Für die Pheromonberechnung werden die benachbarten Zellen in Betracht gezogen, also links, rechts, oben und unten von der Zelle die betrachtet wird. $p_sigma$ ist dabei der Durchschnittspheromonwert dieser Zellen. $p_df$ ist der Diffundierungsparameter, $p_dc$ der Verblassungsparameter.
+$p(zelle) = p_df * p_sigma + (1 - p_df) * p_dc * p(zelle)$
+
+\subsection{Code}
+\begin{lstlisting}[title=Heuristik]
+public double value(StateObservation a_gameState, ACTIONS last, ACTIONS secondToLast) {
+	boolean gameOver = a_gameState.isGameOver();
+	Types.WINNER win = a_gameState.getGameWinner();
+	double rawScore = a_gameState.getGameScore();
+
+	if(gameOver && win == Types.WINNER.PLAYER_LOSES)
+		rawScore += HUGE_NEGATIVE;
+
+	if(gameOver && win == Types.WINNER.PLAYER_WINS)
+		rawScore += HUGE_POSITIVE;
+
+	//penalty for taking reverse action
+	if (ACTIONS.reverseACTION(last) == secondToLast) {
+		rawScore -= PEN_OA;
+	}
+
+	//penalty for using a blocked movement
+	if (!a_gameState.getEventsHistory().isEmpty()) {
+		Event lastEvent = a_gameState.getEventsHistory().last();
+		if (ACTIONS.isMoving(last) && lastEvent.gameStep == a_gameState.getGameTick()) {
+			rawScore -= PEN_BM;
+		}
+	}
+
+	rawScore -= a_gameState.getPheromones();
+
+	return rawScore;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[title=Pheromonupdate]
+private void updatePheromones() {
+	float sigma = 0;
+	int neighbours = 0;
+	
+	for (int row = 0; row < this.pheromones.length; row++) {
+		for (int col = 0; col < this.pheromones[row].length; col++) {
+			//calc sigma
+			sigma = 0;
+			neighbours = 0;			
+			if (row < this.pheromones.length - 1) {
+				sigma += this.pheromones[row+1][col];
+				neighbours++;
+			}
+			if (row > 0) {
+				sigma += this.pheromones[row-1][col];
+				neighbours++;
+			}
+			if (col < this.pheromones[row].length - 1) {
+				sigma += this.pheromones[row][col+1];
+				neighbours++;
+			}
+			if (col > 0) {
+				sigma += this.pheromones[row][col-1];
+				neighbours++;
+			}
+			sigma /= neighbours;
+			
+			//calc this value
+			float old = this.pheromones[row][col];
+			this.pheromones[row][col] = PDF * sigma + (1 - PDF) * PDC * old;
+		}
+	}
+}
+\end{lstlisting}
 \end{document}
